@@ -57,6 +57,7 @@ button{font:inherit;color:inherit}
 
 /* stage */
 .stage{display:grid;grid-template-columns:minmax(0,1fr) 400px;gap:18px;padding:12px 22px 22px;align-items:start}
+.stage>*,.side>*,.detail>*,.graph>*{min-width:0}
 .graph{position:relative;min-height:640px;display:grid;grid-template-columns:minmax(220px,280px) 200px minmax(260px,1fr);column-gap:84px;align-items:center}
 .wires{position:absolute;inset:0;width:100%;height:100%;pointer-events:none;overflow:visible}
 .wire{fill:none;stroke:var(--gold-dim);stroke-width:1.2}
@@ -85,7 +86,7 @@ button{font:inherit;color:inherit}
 .hub-text span{color:var(--muted);font-size:13px}
 
 /* categories */
-.cats{position:relative;z-index:1;display:grid;gap:16px;list-style:none;margin:0;padding:0}
+.cats{position:relative;z-index:1;display:grid;gap:16px;list-style:none;margin:0;padding:0;scrollbar-color:#2A3638 transparent;scrollbar-width:thin}
 .cat{width:100%;display:grid;grid-template-columns:22px 1fr;align-items:center;column-gap:8px;text-align:left;padding:12px 14px;
   background:linear-gradient(180deg,var(--card2),var(--card));border:1px solid var(--border);border-radius:10px;cursor:pointer;
   transition:border-color .2s,box-shadow .2s}
@@ -99,7 +100,7 @@ button{font:inherit;color:inherit}
 /* fan of items */
 .fan{position:relative;z-index:1;list-style:none;margin:0;padding:0;display:grid;gap:10px;align-content:center}
 .item{display:grid;gap:5px;text-align:left;padding:8px 12px;border:1px solid transparent;border-radius:9px;background:transparent;cursor:pointer;
-  max-width:300px;transition:background .2s,border-color .2s,transform .35s ease,opacity .35s}
+  max-width:min(300px,100%);transition:background .2s,border-color .2s,transform .35s ease,opacity .35s}
 .item:hover{background:rgba(255,255,255,.035)}
 .item[aria-current="true"]{background:var(--card);border-color:var(--border2)}
 .item strong{font-weight:500;font-size:13.5px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
@@ -150,7 +151,7 @@ button{font:inherit;color:inherit}
 .analysis p,.analysis li{color:var(--muted);font-size:12.5px}
 .analysis p{margin:0}
 .analysis ul{margin:0;padding-left:16px;display:grid;gap:4px}
-.analysis pre{margin:8px 0 0;font:400 11px/1.65 var(--mono);color:var(--muted);background:var(--bg);border:1px solid var(--border);border-radius:8px;padding:10px;overflow-x:auto}
+.analysis pre{scrollbar-color:#2A3638 transparent;scrollbar-width:thin;margin:8px 0 0;font:400 11px/1.65 var(--mono);color:var(--muted);background:var(--bg);border:1px solid var(--border);border-radius:8px;padding:10px;overflow-x:auto}
 .analysis pre .ok{color:var(--green)}.analysis pre .no{color:var(--amber)}.analysis pre .cmd{color:var(--text)}
 .analysis img{width:100%;height:auto;border-radius:8px;border:1px solid var(--border);margin-top:8px;display:block}
 .tagrow{display:flex;flex-wrap:wrap;gap:6px}
@@ -174,9 +175,19 @@ body.list .graph{grid-template-columns:200px minmax(0,1fr);column-gap:24px;min-h
 body.list .hub,body.list .wires{display:none}
 body.list .item{max-width:none;transform:none!important;opacity:1!important}
 
-@media (max-width:1180px){
+@media (max-width:1359px){
   .stage{grid-template-columns:minmax(0,1fr) 360px}
-  .graph{grid-template-columns:200px 180px minmax(220px,1fr);column-gap:56px}
+  .graph{grid-template-columns:200px 180px minmax(200px,1fr);column-gap:52px}
+}
+@media (min-width:961px) and (max-width:1199px){
+  .graph{grid-template-columns:190px minmax(0,1fr);column-gap:24px;row-gap:18px;min-height:0;align-items:start}
+  .hub{grid-column:1/-1;grid-template-columns:64px 1fr;justify-items:start;text-align:left;align-items:center}
+  .halo{width:64px}
+  .halo::before,.hub h1,.hub-meta,.orbit,.wires{display:none}
+  .orb{width:46%;margin:0}
+  .hub-text{display:block}
+  .item{max-width:none;width:100%;transform:none!important;opacity:1!important;border-color:var(--border);background:var(--panel)}
+  .tools .group:first-child{display:none}
 }
 @media (max-width:960px){
   .bar{grid-template-columns:1fr auto;padding:12px 16px}
@@ -376,6 +387,8 @@ const state={cat:"projects",item:"limiar",query:""};
 const $=id=>document.getElementById(id);
 const reduce=matchMedia("(prefers-reduced-motion: reduce)").matches;
 const narrow=()=>matchMedia("(max-width:960px)").matches;
+/* The wired map only fits from 1200px; below that items are a plain list. */
+const noMap=()=>matchMedia("(max-width:1199px)").matches;
 const isList=()=>document.body.classList.contains("list");
 
 function renderCats(){
@@ -399,7 +412,7 @@ function arc(){
   const btns=[...$("fan").querySelectorAll(".item")];
   const n=btns.length, mid=(n-1)/2, R=420, step=58;
   btns.forEach((b,i)=>{
-    if(narrow()||isList()){b.style.transform="";b.style.opacity="";return}
+    if(noMap()||isList()){b.style.transform="";b.style.opacity="";return}
     const dy=(i-mid)*step, dx=Math.sqrt(Math.max(R*R-dy*dy,0))-R;
     b.style.transform=`translateX(${dx.toFixed(1)}px)`;
     b.style.opacity=n>4?(1-Math.abs(i-mid)/n*.6).toFixed(2):"";
@@ -474,7 +487,7 @@ function renderDetail(){
 function curve(a,b){const dx=Math.max((b.x-a.x)*.5,30);return `M${a.x.toFixed(1)},${a.y.toFixed(1)} C${(a.x+dx).toFixed(1)},${a.y.toFixed(1)} ${(b.x-dx).toFixed(1)},${b.y.toFixed(1)} ${b.x.toFixed(1)},${b.y.toFixed(1)}`}
 function drawWires(animate){
   const svg=$("wires");
-  if(narrow()||isList()){svg.innerHTML="";return}
+  if(noMap()||isList()){svg.innerHTML="";return}
   const g=$("graph").getBoundingClientRect();
   const left=r=>({x:r.left-g.left-4,y:r.top+r.height/2-g.top});
   const right=r=>({x:r.right-g.left,y:r.top+r.height/2-g.top});
@@ -535,8 +548,12 @@ function setView(list){
 $("viewGraph").addEventListener("click",()=>setView(false));
 $("viewList").addEventListener("click",()=>setView(true));
 
+/* Redraw whenever the map's box changes size, not only on window resize:
+   a scrollbar appearing or late-loading fonts also move the cards. */
 let resizeTimer;
-addEventListener("resize",()=>{clearTimeout(resizeTimer);resizeTimer=setTimeout(()=>{arc();drawWires(false)},80)});
+const relayout=()=>{clearTimeout(resizeTimer);resizeTimer=setTimeout(()=>{arc();drawWires(false)},60)};
+addEventListener("resize",relayout);
+if("ResizeObserver" in window)new ResizeObserver(relayout).observe($("graph"));
 if(document.fonts)document.fonts.ready.then(()=>drawWires(false));
 
 const fromHash=decodeURIComponent(location.hash.slice(1));
