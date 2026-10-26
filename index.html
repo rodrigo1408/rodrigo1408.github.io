@@ -8,321 +8,540 @@
 <meta property="og:title" content="Rodrigo Barreto, Java developer">
 <meta property="og:description" content="Enterprise Java, Oracle PL/SQL and evidence-driven AI for legacy modernization.">
 <meta property="og:type" content="website">
-<meta name="theme-color" content="#0B0D12">
-<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='7' fill='%230B0D12'/><path d='M9 22V10h3v9.5h6V22z' fill='%23A3FF12'/><rect x='20' y='19.5' width='4' height='2.5' fill='%2300D9FF'/></svg>">
+<meta name="theme-color" content="#0B1213">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='8' fill='%230B1213'/><circle cx='16' cy='16' r='9' fill='none' stroke='%23D9C79A' stroke-width='1.5'/><circle cx='16' cy='16' r='5' fill='%23A78BFA'/></svg>">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
 <style>
 :root{
-  --bg:#0B0D12; --surface:#151923; --border:#292F3A;
-  --text:#F5F7FA; --muted:#A0A8B7;
-  --lime:#A3FF12; --cyan:#00D9FF;
+  --bg:#0B1213; --panel:#111A1B; --card:#162123; --card2:#1B2729;
+  --border:rgba(255,255,255,.08); --border2:rgba(255,255,255,.14);
+  --text:#EEF2F0; --muted:#8E9B99; --dim:#5F6C6A;
+  --gold:#D9C79A; --gold-dim:rgba(217,199,154,.28);
+  --orb:#A78BFA; --teal:#5EEAD4; --green:#4ADE80; --amber:#FBBF24;
   --sans:"Inter","Segoe UI",system-ui,-apple-system,sans-serif;
   --mono:"JetBrains Mono",ui-monospace,Consolas,monospace;
-  --radius:10px;
 }
 *{box-sizing:border-box}
-html{scroll-behavior:smooth}
-body{margin:0;background:var(--bg);color:var(--text);font:400 16px/1.65 var(--sans);-webkit-font-smoothing:antialiased}
-a{color:var(--cyan);text-underline-offset:3px;text-decoration-thickness:1px}
-a:hover{color:var(--text)}
-:focus-visible{outline:2px solid var(--lime);outline-offset:3px;border-radius:4px}
-.wrap{max-width:1040px;margin:0 auto;padding:0 24px}
-h1,h2,h3{margin:0;line-height:1.2;font-weight:600;letter-spacing:-.01em}
-p{margin:0}
-code,pre,.mono{font-family:var(--mono)}
-code{font-size:.9em;color:var(--text);background:var(--surface);border:1px solid var(--border);border-radius:5px;padding:1px 6px}
-.skip{position:absolute;left:-999px;top:8px;background:var(--lime);color:var(--bg);padding:8px 12px;border-radius:6px;font-weight:600}
-.skip:focus{left:16px}
+html,body{margin:0}
+body{min-height:100vh;color:var(--text);font:400 14px/1.55 var(--sans);-webkit-font-smoothing:antialiased;
+  background:radial-gradient(ellipse 70% 60% at 22% 50%,#152325 0%,transparent 70%),
+             radial-gradient(ellipse 60% 50% at 90% 0%,#13201F 0%,transparent 60%),var(--bg)}
+a{color:var(--teal)}
+button{font:inherit;color:inherit}
+:focus-visible{outline:2px solid var(--gold);outline-offset:2px;border-radius:8px}
+.sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
 
-/* header */
-.top{display:flex;align-items:center;justify-content:space-between;gap:16px;padding:22px 0;border-bottom:1px solid var(--border)}
-.brand{display:flex;align-items:center;gap:10px;color:var(--text);text-decoration:none;font-weight:600}
-.brand i{width:10px;height:10px;border-radius:2px;background:var(--lime)}
-.top nav{display:flex;gap:4px;flex-wrap:wrap}
-.top nav a{color:var(--muted);text-decoration:none;font-size:14px;padding:8px 10px;border-radius:6px}
-.top nav a:hover{color:var(--text);background:var(--surface)}
+/* top bar */
+.bar{display:grid;grid-template-columns:1fr auto 1fr;align-items:center;gap:16px;padding:14px 22px}
+.brand{display:flex;align-items:center;gap:12px;color:var(--text);text-decoration:none}
+.brand svg{width:34px;height:34px;flex:none}
+.brand b{display:block;font-weight:600;font-size:15px;line-height:1.1}
+.brand span{display:block;color:var(--muted);font-size:12px}
+.tools{display:flex;gap:8px}
+.group{display:flex;gap:2px;padding:3px;background:var(--panel);border:1px solid var(--border);border-radius:10px}
+.tool{display:grid;place-items:center;width:36px;height:32px;border:0;border-radius:7px;background:transparent;color:var(--muted);cursor:pointer;text-decoration:none}
+.tool:hover{color:var(--text);background:var(--card)}
+.tool[aria-pressed="true"]{background:var(--card2);color:var(--gold);box-shadow:inset 0 0 0 1px var(--border2)}
+.tool svg{width:17px;height:17px}
+.right{display:flex;justify-content:flex-end;align-items:center;gap:8px}
+.pill{display:inline-flex;align-items:center;gap:8px;padding:8px 14px;border-radius:9px;border:1px solid var(--border2);background:var(--panel);color:var(--text);font-weight:500;font-size:13px;text-decoration:none}
+.pill:hover{border-color:var(--gold)}
+.pill svg{width:15px;height:15px}
+.round{width:34px;height:34px;border-radius:50%;display:grid;place-items:center;border:1px solid var(--border);background:var(--panel);color:var(--muted)}
+.round:hover{color:var(--text);border-color:var(--border2)}
+.round svg{width:16px;height:16px}
+.banner{margin:0 22px 0 auto;padding:7px 16px;border-radius:10px;background:var(--panel);border:1px solid var(--border);color:var(--muted);font-size:13px;width:max-content;max-width:calc(100% - 44px)}
+.banner b{color:var(--text);font-weight:500}
 
-/* hero */
-.hero{padding:88px 0 72px;max-width:760px}
-.eyebrow{font:500 13px/1 var(--mono);color:var(--lime);margin-bottom:20px}
-.hero h1{font-size:clamp(30px,4.6vw,46px);font-weight:700;margin-bottom:20px}
-.hero h1 em{font-style:normal;color:var(--lime)}
-.hero p{color:var(--muted);font-size:18px;max-width:60ch}
-.pipeline{margin-top:36px;display:flex;flex-wrap:wrap;align-items:center;gap:6px;font:400 13px/1 var(--mono);color:var(--muted)}
-.pipeline span{padding:7px 10px;border:1px solid var(--border);border-radius:6px;background:var(--surface)}
-.pipeline span:last-child{border-color:var(--lime);color:var(--lime)}
-.pipeline b{font-weight:400;color:var(--border)}
-.actions{display:flex;gap:10px;flex-wrap:wrap;margin-top:36px}
-.btn{display:inline-flex;align-items:center;gap:8px;padding:10px 16px;border-radius:8px;font-weight:600;font-size:15px;text-decoration:none;border:1px solid var(--border);color:var(--text);background:var(--surface)}
-.btn:hover{border-color:var(--muted);color:var(--text)}
-.btn.primary{background:var(--lime);border-color:var(--lime);color:var(--bg)}
-.btn.primary:hover{background:var(--text);border-color:var(--text);color:var(--bg)}
+/* stage */
+.stage{display:grid;grid-template-columns:minmax(0,1fr) 400px;gap:18px;padding:12px 22px 22px;align-items:start}
+.graph{position:relative;min-height:640px;display:grid;grid-template-columns:minmax(220px,280px) 200px minmax(260px,1fr);column-gap:84px;align-items:center}
+.wires{position:absolute;inset:0;width:100%;height:100%;pointer-events:none;overflow:visible}
+.wire{fill:none;stroke:var(--gold-dim);stroke-width:1.2}
+.wire.on{stroke:var(--gold);stroke-width:1.4;filter:drop-shadow(0 0 4px rgba(217,199,154,.55))}
+.wire.draw{stroke-dasharray:var(--len);stroke-dashoffset:var(--len);animation:draw .7s ease forwards}
+@keyframes draw{to{stroke-dashoffset:0}}
 
-/* sections */
-section{padding:64px 0;border-top:1px solid var(--border)}
-.head{display:flex;justify-content:space-between;align-items:baseline;gap:16px;flex-wrap:wrap;margin-bottom:28px}
-.head h2{font-size:24px}
-.head p{color:var(--muted);font-size:15px}
+/* hub */
+.hub{position:relative;z-index:1;display:grid;justify-items:center;text-align:center;gap:14px}
+.halo{position:relative;width:min(260px,100%);aspect-ratio:1;border-radius:50%;display:grid;place-items:center;
+  background:radial-gradient(circle,#1C2A2C 0%,#121C1D 58%,transparent 70%)}
+.halo::before{content:"";position:absolute;inset:6%;border-radius:50%;border:1px solid var(--border)}
+.hub h1{position:absolute;top:10%;left:0;right:0;margin:0;font-size:14px;font-weight:600;line-height:1.3}
+.hub h1 span{display:block;color:var(--muted);font-weight:400;font-size:12px}
+.orbit{position:absolute;inset:29%;animation:spin 60s linear infinite}
+.orbit text{font:500 7px var(--mono);fill:var(--muted)}
+.orb{width:24%;aspect-ratio:1;border-radius:50%;margin-top:6%;
+  background:radial-gradient(circle at 35% 30%,#E9DDFF 0%,#B79CFF 30%,#7C5CE0 70%,#4B2FA8 100%);
+  box-shadow:0 0 28px rgba(167,139,250,.55),0 0 70px rgba(167,139,250,.25);animation:pulse 4s ease-in-out infinite}
+@keyframes spin{to{transform:rotate(360deg)}}
+@keyframes pulse{50%{box-shadow:0 0 36px rgba(167,139,250,.75),0 0 90px rgba(167,139,250,.35)}}
+.hub-meta{position:absolute;bottom:14%;left:0;right:0;display:flex;justify-content:center;gap:6px}
+.mini{font:500 10.5px/1 var(--mono);color:var(--muted);padding:4px 7px;border-radius:5px;background:rgba(255,255,255,.05);border:1px solid var(--border);white-space:nowrap}
+.hub-text{display:none}
+.hub-text strong{display:block;font-size:16px}
+.hub-text span{color:var(--muted);font-size:13px}
 
-/* projects */
-.projects{display:grid;gap:20px}
-.card{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:28px}
-.card-top{display:flex;justify-content:space-between;align-items:flex-start;gap:16px;flex-wrap:wrap;margin-bottom:14px}
-.card h3{font-size:22px}
-.card h3 small{display:block;font:400 13px/1.4 var(--mono);color:var(--muted);margin-top:6px}
-.status{display:inline-flex;align-items:center;gap:8px;font:500 12px/1 var(--mono);color:var(--text);border:1px solid var(--border);border-radius:999px;padding:6px 10px;white-space:nowrap}
-.status::before{content:"";width:7px;height:7px;border-radius:50%;background:var(--lime)}
-.status.next::before{background:var(--cyan)}
-.card > p{color:var(--muted);max-width:72ch}
-.grid2{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:24px;margin-top:22px}
-.card h4{margin:0 0 10px;font-size:13px;font-weight:600;color:var(--text);text-transform:uppercase;letter-spacing:.06em}
-.list{list-style:none;margin:0;padding:0;display:grid;gap:8px;font-size:15px;color:var(--muted)}
-.list li{padding-left:16px;position:relative}
-.list li::before{content:"";position:absolute;left:0;top:.7em;width:6px;height:2px;background:var(--lime)}
-.list b{color:var(--text);font-weight:600}
-.tags{display:flex;flex-wrap:wrap;gap:6px;margin-top:22px}
-.tags span{font:400 12px/1 var(--mono);color:var(--muted);border:1px solid var(--border);border-radius:5px;padding:6px 8px}
-.links{display:flex;gap:18px;flex-wrap:wrap;margin-top:22px;font-size:15px}
+/* categories */
+.cats{position:relative;z-index:1;display:grid;gap:16px;list-style:none;margin:0;padding:0}
+.cat{width:100%;display:grid;grid-template-columns:22px 1fr;align-items:center;column-gap:8px;text-align:left;padding:12px 14px;
+  background:linear-gradient(180deg,var(--card2),var(--card));border:1px solid var(--border);border-radius:10px;cursor:pointer;
+  transition:border-color .2s,box-shadow .2s}
+.cat:hover{border-color:var(--border2)}
+.cat svg{width:16px;height:16px;color:var(--muted)}
+.cat b{font-size:22px;font-weight:600;line-height:1}
+.cat span{grid-column:2;color:var(--muted);font-size:12px}
+.cat[aria-pressed="true"]{border-color:var(--gold);box-shadow:0 0 0 1px var(--gold),0 0 22px rgba(217,199,154,.22)}
+.cat[aria-pressed="true"] svg{color:var(--gold)}
 
-/* demos */
-.demos{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:20px}
-.demo{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:22px;display:grid;gap:14px;align-content:start}
-.demo h3{font-size:17px}
-.demo p{color:var(--muted);font-size:14px}
-.demo img{width:100%;height:auto;border-radius:8px;border:1px solid var(--border);display:block}
-pre{margin:0;background:var(--bg);border:1px solid var(--border);border-radius:8px;padding:14px;overflow-x:auto;font-size:12.5px;line-height:1.7;color:var(--muted)}
-pre .cmd{color:var(--text)}
-pre .ok{color:var(--lime)}
-pre .no{color:var(--cyan)}
+/* fan of items */
+.fan{position:relative;z-index:1;list-style:none;margin:0;padding:0;display:grid;gap:10px;align-content:center}
+.item{display:grid;gap:5px;text-align:left;padding:8px 12px;border:1px solid transparent;border-radius:9px;background:transparent;cursor:pointer;
+  max-width:300px;transition:background .2s,border-color .2s,transform .35s ease,opacity .35s}
+.item:hover{background:rgba(255,255,255,.035)}
+.item[aria-current="true"]{background:var(--card);border-color:var(--border2)}
+.item strong{font-weight:500;font-size:13.5px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.item[aria-current="true"] strong{color:var(--gold)}
+.chips{display:flex;gap:5px;flex-wrap:wrap}
+.chip{font:500 10px/1 var(--mono);padding:3px 6px;border-radius:4px;background:rgba(255,255,255,.06);color:var(--muted);white-space:nowrap}
+.chip.g{color:var(--green);background:rgba(74,222,128,.1)}
+.chip.a{color:var(--amber);background:rgba(251,191,36,.1)}
+.chip.p{color:var(--orb);background:rgba(167,139,250,.12)}
+.chip.t{color:var(--teal);background:rgba(94,234,212,.1)}
+.empty{color:var(--muted);font-size:13px;padding:8px 12px}
 
-/* skills */
-.skills{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:20px}
-.skills h3{font-size:15px;margin-bottom:10px}
-.skills p{color:var(--muted);font-size:14px}
+/* detail panel */
+.side{position:sticky;top:12px;display:grid;gap:12px}
+.detail{background:linear-gradient(180deg,#152022,#111A1B);border:1px solid var(--border);border-radius:16px;padding:22px;display:grid;gap:16px;min-height:540px;align-content:start}
+.kicker{display:flex;align-items:center;gap:10px;color:var(--text);font-size:13.5px}
+.kicker svg{width:26px;height:26px;color:var(--gold)}
+.detail h2{margin:0;font-size:22px;font-weight:500;line-height:1.25}
+.detail h2 span{display:block;color:var(--muted);font-size:14px;font-weight:400;margin-top:4px}
+.statusrow{display:flex;flex-wrap:wrap;justify-content:space-between;gap:12px;align-items:center;padding:12px;border-radius:12px;background:rgba(255,255,255,.03);border:1px solid var(--border)}
+.status{display:inline-block;white-space:nowrap;font-size:11.5px;font-weight:500;padding:3px 9px;border-radius:6px;color:var(--green);background:rgba(74,222,128,.1);border:1px solid rgba(74,222,128,.3)}
+.status.next{color:var(--orb);background:rgba(167,139,250,.1);border-color:rgba(167,139,250,.3)}
+.status.done{color:var(--muted);background:rgba(255,255,255,.05);border-color:var(--border2)}
+.statusrow p{margin:6px 0 0;color:var(--muted);font-size:12px}
+.go{display:inline-flex;align-items:center;gap:6px;padding:9px 13px;border-radius:9px;background:var(--card2);border:1px solid var(--border2);color:var(--text);font-weight:500;font-size:13px;text-decoration:none;white-space:nowrap}
+.go:hover{border-color:var(--gold)}
+.go.off{color:var(--muted)}
+.metric{position:relative;overflow:hidden;padding:16px;border-radius:12px;border:1px solid var(--border2);background:#161B1C}
+.metric.cool{border-color:rgba(167,139,250,.22);background:radial-gradient(ellipse 90% 120% at 0% 100%,rgba(167,139,250,.14),transparent 60%),#17171D}
+.metric.teal{border-color:rgba(94,234,212,.2);background:radial-gradient(ellipse 90% 120% at 0% 100%,rgba(94,234,212,.1),transparent 60%),#141C1C}
+.metric-head{display:flex;justify-content:space-between;gap:8px;align-items:center}
+.metric-head span{font-size:13px}
+.metric-head em{font-style:normal;font-size:11px;padding:3px 8px;border-radius:6px;border:1px solid var(--border2);color:var(--muted)}
+.metric-body{display:grid;grid-template-columns:auto 1fr;gap:16px;align-items:end;margin-top:10px}
+.metric-body b{font-size:38px;font-weight:500;line-height:1;letter-spacing:-.02em}
+.metric-body small{display:block;color:var(--muted);font-size:11.5px;margin-top:6px;max-width:150px}
+.viz{margin:0}
+.viz svg{display:block;width:100%;height:56px}
+.viz figcaption{color:var(--dim);font-size:10.5px;text-align:right;margin-top:4px}
+.stats{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.stat{padding:14px;border-radius:12px;background:rgba(255,255,255,.03);border:1px solid var(--border)}
+.stat b{display:block;font-size:22px;font-weight:500;line-height:1.1}
+.stat span{display:block;color:var(--muted);font-size:12px;margin-top:6px;line-height:1.35}
+.section-title{display:flex;align-items:center;gap:8px;font-size:13.5px;font-weight:500;margin:4px 0 -4px}
+.section-title svg{width:16px;height:16px;color:var(--gold)}
+.analysis{padding:14px;border-radius:12px;background:rgba(255,255,255,.03);border:1px solid var(--border)}
+.analysis h3{margin:0 0 6px;font-size:13px;font-weight:600}
+.analysis p,.analysis li{color:var(--muted);font-size:12.5px}
+.analysis p{margin:0}
+.analysis ul{margin:0;padding-left:16px;display:grid;gap:4px}
+.analysis pre{margin:8px 0 0;font:400 11px/1.65 var(--mono);color:var(--muted);background:var(--bg);border:1px solid var(--border);border-radius:8px;padding:10px;overflow-x:auto}
+.analysis pre .ok{color:var(--green)}.analysis pre .no{color:var(--amber)}.analysis pre .cmd{color:var(--text)}
+.analysis img{width:100%;height:auto;border-radius:8px;border:1px solid var(--border);margin-top:8px;display:block}
+.tagrow{display:flex;flex-wrap:wrap;gap:6px}
+.links{display:flex;flex-wrap:wrap;gap:14px;font-size:13px}
 
-/* docs */
-.docs{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px}
-.docs a{display:block;text-decoration:none;color:var(--text);background:var(--surface);border:1px solid var(--border);border-radius:8px;padding:14px 16px;font-size:15px}
-.docs a span{display:block;color:var(--muted);font-size:13px;margin-top:4px}
-.docs a:hover{border-color:var(--cyan)}
-.docs .private{color:var(--muted);border:1px dashed var(--border);border-radius:8px;padding:14px 16px;font-size:15px;grid-column:span 2}
-.docs .private span{display:block;font-size:13px;margin-top:4px}
-.note{margin-top:22px;color:var(--muted);font-size:14px;border-left:2px solid var(--border);padding-left:12px}
+/* search bar */
+.ask{display:grid;gap:8px;padding:10px;border-radius:14px;background:var(--panel);border:1px solid var(--border)}
+.ask-field{display:flex;align-items:center;gap:8px;padding:4px 4px 4px 14px;border-radius:999px;background:#E9EEEC}
+.ask input{flex:1;min-width:0;border:0;background:transparent;font:400 14px var(--sans);color:#0B1213;padding:8px 0;outline:none}
+.ask input::placeholder{color:#5F6C6A}
+.ask-field:focus-within{box-shadow:0 0 0 2px var(--gold)}
+.ask button[type=submit]{width:34px;height:34px;border-radius:50%;border:0;background:#0B1213;color:#E9EEEC;display:grid;place-items:center;cursor:pointer}
+.ask button svg{width:16px;height:16px}
+.quick{display:flex;gap:6px;flex-wrap:wrap}
+.quick button{border:1px solid var(--border);background:var(--card);color:var(--muted);border-radius:8px;padding:5px 9px;font-size:12px;cursor:pointer}
+.quick button:hover{color:var(--text);border-color:var(--border2)}
+.hint{color:var(--dim);font-size:11.5px;margin:0 4px}
 
-/* experience */
-.timeline{list-style:none;margin:0;padding:0;display:grid;gap:28px}
-.timeline li{display:grid;grid-template-columns:170px minmax(0,1fr);gap:24px}
-.when{font:400 13px/1.9 var(--mono);color:var(--muted)}
-.timeline h3{font-size:17px;margin-bottom:6px}
-.timeline p{color:var(--muted);font-size:15px;max-width:70ch}
-.other{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px 32px;margin-top:8px}
-.other a{font-weight:600}
-.other p{color:var(--muted);font-size:14px}
+/* list view (toolbar toggle) */
+body.list .graph{grid-template-columns:200px minmax(0,1fr);column-gap:24px;min-height:0;align-items:start}
+body.list .hub,body.list .wires{display:none}
+body.list .item{max-width:none;transform:none!important;opacity:1!important}
 
-footer{border-top:1px solid var(--border);padding:56px 0 64px}
-footer h2{font-size:24px;margin-bottom:10px}
-footer > .wrap > p{color:var(--muted);max-width:60ch}
-.fine{margin-top:40px;color:var(--muted);font-size:13px}
-
-@media (max-width:860px){
-  .grid2,.demos,.other{grid-template-columns:1fr}
-  .skills{grid-template-columns:repeat(2,minmax(0,1fr))}
-  .docs{grid-template-columns:1fr 1fr}
-  .docs .private{grid-column:span 2}
+@media (max-width:1180px){
+  .stage{grid-template-columns:minmax(0,1fr) 360px}
+  .graph{grid-template-columns:200px 180px minmax(220px,1fr);column-gap:56px}
 }
-@media (max-width:560px){
-  .wrap{padding:0 16px}
-  .top{flex-direction:column;align-items:flex-start}
-  .hero{padding:56px 0 48px}
-  .card{padding:20px}
-  .skills,.docs{grid-template-columns:1fr}
-  .docs .private{grid-column:auto}
-  .timeline li{grid-template-columns:1fr;gap:4px}
+@media (max-width:960px){
+  .bar{grid-template-columns:1fr auto;padding:12px 16px}
+  .tools{display:none}
+  .banner{margin:0 16px;width:auto;max-width:none}
+  .stage{grid-template-columns:1fr;padding:12px 16px 24px}
+  .graph,body.list .graph{grid-template-columns:1fr;min-height:0;row-gap:14px}
+  .wires{display:none}
+  .hub,body.list .hub{display:grid;grid-template-columns:72px 1fr;justify-items:start;text-align:left;align-items:center;gap:14px}
+  .halo{width:72px}
+  .halo::before,.hub h1,.hub-meta,.orbit{display:none}
+  .orb{width:46%;margin:0}
+  .hub-text{display:block}
+  .cats{display:flex;overflow-x:auto;gap:8px;padding-bottom:4px;scrollbar-width:thin}
+  .cats li{flex:none}
+  .cat{grid-template-columns:18px auto;padding:9px 12px}
+  .cat b{font-size:17px}
+  .item{max-width:none;width:100%;transform:none!important;opacity:1!important;border-color:var(--border);background:var(--panel)}
+  .side{position:static}
+  .detail{min-height:0;padding:18px}
 }
-@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+@media (max-width:520px){
+  .right .pill span{display:none}
+  .metric-body{grid-template-columns:1fr}
+}
+@media (prefers-reduced-motion:reduce){
+  *{animation:none!important;transition:none!important}
+  .wire.draw{stroke-dasharray:none;stroke-dashoffset:0}
+}
 </style>
 </head>
 <body>
-<a class="skip" href="#main">Skip to content</a>
 
-<div class="wrap">
-<header class="top">
-  <a class="brand" href="#"><i aria-hidden="true"></i>Rodrigo Barreto</a>
-  <nav aria-label="Main">
-    <a href="#projects">Projects</a>
-    <a href="#demos">Demos</a>
-    <a href="#skills">Skills</a>
-    <a href="#experience">Experience</a>
-    <a href="#contact">Contact</a>
-    <a href="https://github.com/rodrigo1408">GitHub</a>
-  </nav>
+<header class="bar">
+  <a class="brand" href="#" aria-label="Rodrigo Barreto, home">
+    <svg viewBox="0 0 34 34" aria-hidden="true"><path d="M17 2l4 4h6v6l4 5-4 5v6h-6l-4 4-4-4H7v-6l-4-5 4-5V6h6z" fill="none" stroke="#D9C79A" stroke-width="1.4"/><circle cx="17" cy="17" r="4.5" fill="#A78BFA"/></svg>
+    <div><b>Rodrigo Barreto</b><span>Legacy modernization · applied AI</span></div>
+  </a>
+  <div class="tools" role="toolbar" aria-label="View">
+    <div class="group">
+      <button class="tool" id="viewGraph" aria-pressed="true" title="Map view"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="5" cy="12" r="2.5"/><circle cx="19" cy="5" r="2.5"/><circle cx="19" cy="19" r="2.5"/><path d="M7.5 12c5 0 5-7 9-7M7.5 12c5 0 5 7 9 7"/></svg><span class="sr">Map view</span></button>
+      <button class="tool" id="viewList" aria-pressed="false" title="List view"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M9 6h11M9 12h11M9 18h11"/><circle cx="4.5" cy="6" r="1"/><circle cx="4.5" cy="12" r="1"/><circle cx="4.5" cy="18" r="1"/></svg><span class="sr">List view</span></button>
+    </div>
+    <div class="group">
+      <a class="tool" href="https://github.com/rodrigo1408" title="GitHub"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2a10 10 0 00-3.2 19.5c.5.1.7-.2.7-.5v-1.7c-2.8.6-3.4-1.2-3.4-1.2-.4-1.2-1.1-1.5-1.1-1.5-.9-.6.1-.6.1-.6 1 .1 1.5 1 1.5 1 .9 1.5 2.3 1.1 2.9.8.1-.6.3-1.1.6-1.3-2.2-.3-4.6-1.1-4.6-5 0-1.1.4-2 1-2.7-.1-.3-.4-1.3.1-2.7 0 0 .8-.3 2.8 1a9.6 9.6 0 015 0c1.9-1.3 2.8-1 2.8-1 .5 1.4.2 2.4.1 2.7.6.7 1 1.6 1 2.7 0 3.9-2.4 4.7-4.6 5 .4.3.7.9.7 1.9v2.8c0 .3.2.6.7.5A10 10 0 0012 2z"/></svg><span class="sr">GitHub</span></a>
+      <a class="tool" href="https://www.linkedin.com/in/rodrigo-barreto-2b1ba6129" title="LinkedIn"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M4.98 3.5a2.5 2.5 0 110 5 2.5 2.5 0 010-5zM3 9.5h4v11H3zM10 9.5h3.8v1.6h.1c.5-1 1.8-2 3.7-2 4 0 4.7 2.6 4.7 6v5.4h-4v-4.8c0-1.2 0-2.6-1.6-2.6s-1.9 1.2-1.9 2.5v4.9H10z"/></svg><span class="sr">LinkedIn</span></a>
+      <a class="tool" href="mailto:rodrigomendesbarreto@hotmail.com" title="Email"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3.5 6.5l8.5 6 8.5-6"/></svg><span class="sr">Email</span></a>
+    </div>
+  </div>
+  <div class="right">
+    <a class="pill" href="Rodrigo_Barreto_Resume.pdf"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 4v12M6 10l6 6 6-6M5 20h14"/></svg><span>Resume (PDF)</span></a>
+    <a class="round" href="mailto:rodrigomendesbarreto@hotmail.com" title="Email me"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3.5 6.5l8.5 6 8.5-6"/></svg><span class="sr">Email me</span></a>
+  </div>
 </header>
 
-<main id="main">
-<div class="hero">
-  <p class="eyebrow">Java · Oracle PL/SQL · applied AI</p>
-  <h1>I modernize legacy Oracle systems with AI that has to <em>show its evidence</em>.</h1>
-  <p>Java and Oracle PL/SQL developer from Brazil, working on enterprise systems since 2020, including REST services for a large healthcare cooperative. I build multi-agent tools that migrate Oracle Forms to Spring Boot, where deterministic code extracts the facts and every AI step is checked before it counts.</p>
-  <div class="pipeline" aria-label="LIMIAR pipeline: legacy, analysis, knowledge, architecture, implementation, validation">
-    <span>legacy XML</span><b>→</b><span>analysis</span><b>→</b><span>business rules</span><b>→</b><span>architecture</span><b>→</b><span>Java</span><b>→</b><span>validated</span>
-  </div>
-  <div class="actions">
-    <a class="btn primary" href="#projects">See the projects</a>
-    <a class="btn" href="Rodrigo_Barreto_Resume.pdf">Resume (PDF)</a>
-  </div>
-</div>
+<p class="banner">Open to <b>remote Java roles</b>, overlapping US and EU hours · Caucaia, Brazil</p>
 
-<section id="projects" aria-labelledby="projects-title">
-  <div class="head"><h2 id="projects-title">Featured projects</h2><p>Status reflects what runs today, not what is planned.</p></div>
-  <div class="projects">
+<main class="stage">
+  <section class="graph" id="graph" aria-label="Portfolio map">
+    <svg class="wires" id="wires" aria-hidden="true"></svg>
 
-    <article class="card">
-      <div class="card-top">
-        <h3>LIMIAR<small>oracle-migration-ai · Python · LangGraph · Claude</small></h3>
-        <span class="status">Working pipeline · in development</span>
+    <div class="hub">
+      <div class="halo">
+        <h1>Rodrigo Barreto<span>Java · Oracle PL/SQL · applied AI</span></h1>
+        <svg class="orbit" viewBox="0 0 100 100" aria-hidden="true">
+          <defs><path id="ring" d="M50,50 m-42,0 a42,42 0 1,1 84,0 a42,42 0 1,1 -84,0"/></defs>
+          <text><textPath href="#ring" textLength="262" lengthAdjust="spacing">JAVA · ORACLE · LANGGRAPH · CLAUDE · NUMPY ·</textPath></text>
+        </svg>
+        <div class="orb" aria-hidden="true"></div>
+        <div class="hub-meta"><span class="mini">since 2020</span><span class="mini">Caucaia, BR</span></div>
       </div>
-      <p>Oracle Forms and Reports hide years of business rules inside triggers and PL/SQL. Migrations fail when a rule is lost, or when one is invented. LIMIAR reads Forms/Reports exported as XML, reconstructs what the system does, designs a Spring Boot architecture and generates Java code that must pass independent validation. Anything the XML does not support is reported as missing, never guessed.</p>
-      <div class="grid2">
-        <div>
-          <h4>How it works</h4>
-          <ul class="list">
-            <li>8 specialist agents orchestrated by a LangGraph state machine, with SQLite checkpointing and crash recovery</li>
-            <li>Deterministic extraction before every AI step; Oracle metadata turned into database dependency contracts</li>
-            <li>Eight validation layers with zero LLM calls, enforced by a test; the generating agent never validates itself</li>
-            <li><b>LIMIAR Maintenance:</b> Investigator → Developer → QA → Reviewer agents fix queued bugs; a PR opens only if 10 deterministic gates pass, and merge is always human</li>
-          </ul>
-        </div>
-        <div>
-          <h4>Verifiable evidence</h4>
-          <ul class="list">
-            <li><b>3,057 tests</b> passing on <code>master</code> (local run, Oct 2026)</li>
-            <li>CI runs the full suite on every push and pull request</li>
-            <li>Reproducible gate demo: <b>9/9 scenarios</b> (1 legitimate fix passes, 8 unauthorized changes blocked)</li>
-            <li>A real end-to-end migration case study, with every verdict shown, including the failing ones</li>
-          </ul>
-        </div>
+      <div class="hub-text">
+        <strong>Rodrigo Barreto</strong>
+        <span>Java and Oracle PL/SQL developer since 2020, building AI tools for legacy modernization.</span>
       </div>
-      <div class="tags"><span>Python</span><span>LangGraph</span><span>Claude</span><span>Pydantic</span><span>pytest</span><span>GitHub Actions</span><span>Oracle Forms</span><span>Java / Spring Boot</span></div>
-      <p class="note">Private repository. I'm happy to walk through the code, architecture and case study in an interview.</p>
-    </article>
-
-    <article class="card">
-      <div class="card-top">
-        <h3>llm-do-zero<small>Python · NumPy · no autograd, no pretrained weights</small></h3>
-        <span class="status next">v0.1 · MLP done · Transformer next</span>
-      </div>
-      <p>A character-level language model written from scratch to show how language models learn: tokenizer, embeddings, hand-derived backpropagation, AdamW, training and sampling. It learns to invent Brazilian town names from the 5,298 official names published by IBGE.</p>
-      <div class="grid2">
-        <div>
-          <h4>What is implemented</h4>
-          <ul class="list">
-            <li>Every backward pass checked against finite differences (relative error &lt; 1e-6)</li>
-            <li>Sequence-level train/validation/test split; test set evaluated once</li>
-            <li>Five reproducible experiments: learning rate, context size, optimizer, overfitting, weight decay</li>
-          </ul>
-        </div>
-        <div>
-          <h4>Measured results</h4>
-          <ul class="list">
-            <li>Validation loss <b>1.84</b> nats/token vs. 2.39 for a count-based bigram and 3.74 for a uniform guess</li>
-            <li>37 tests; identical results across runs on the same machine</li>
-          </ul>
-        </div>
-      </div>
-      <div class="tags"><span>Python</span><span>NumPy</span><span>pytest</span><span>GitHub Actions</span></div>
-      <div class="links">
-        <a href="https://github.com/rodrigo1408/llm-do-zero">Repository</a>
-        <a href="https://github.com/rodrigo1408/llm-do-zero/blob/main/results/SUMMARY.md">Experiment results</a>
-      </div>
-    </article>
-
-  </div>
-</section>
-
-<section id="demos" aria-labelledby="demos-title">
-  <div class="head"><h2 id="demos-title">Demos</h2><p>Both run locally, with no API key and no cost.</p></div>
-  <div class="demos">
-    <div class="demo">
-      <h3>LIMIAR Maintenance: the diff gate</h3>
-      <p>The same <code>check-diff</code> command the pipeline runs on each agent's patch, applied to a throwaway clone. Output from a local run (private repository).</p>
-<pre><span class="cmd">$ python scripts/maintenance_gates_demo.py</span>
-<span class="ok">PASS   </span> legitimate fix with regression test
-<span class="no">BLOCKED</span> developer edits the agent policy
-<span class="no">BLOCKED</span> QA edits production code
-<span class="no">BLOCKED</span> test disabled with @pytest.mark.skip
-<span class="no">BLOCKED</span> existing test deleted
-<span class="no">BLOCKED</span> credential-shaped token added
-<span class="no">BLOCKED</span> real Oracle driver imported
-<span class="no">BLOCKED</span> final diff without a regression test
-9/9 scenarios with the expected result</pre>
     </div>
-    <div class="demo">
-      <h3>llm-do-zero: watching a model overfit</h3>
-      <p>Trained on only 300 names, training loss keeps falling while validation loss rises after step 500.</p>
-      <img src="assets/llm-overfitting.svg" width="760" height="380" loading="lazy" alt="Loss curves: training loss falls to about 0.8 while validation loss rises from 2.3 to 3.2; weight decay limits validation loss to 2.6.">
-<pre><span class="cmd">$ llmzero generate --run runs/default -n 4 --temperature 0.8</span>
-nossia
-coronel mosal
-guaporácia
-timpo cochos</pre>
-    </div>
-  </div>
-</section>
 
-<section id="skills" aria-labelledby="skills-title">
-  <div class="head"><h2 id="skills-title">Skills</h2><p>Grouped by what I use them for.</p></div>
-  <div class="skills">
-    <div><h3>Backend</h3><p>Java, Spring Boot, REST APIs, JPA, Angular</p></div>
-    <div><h3>Oracle and data</h3><p>Oracle PL/SQL, Oracle Forms and Reports, SQL tuning, PostgreSQL</p></div>
-    <div><h3>AI engineering</h3><p>Multi-agent systems with LangGraph and Claude, Claude Code agents, deterministic validation of AI output, neural networks in NumPy</p></div>
-    <div><h3>Quality and delivery</h3><p>pytest, Pydantic contracts, GitHub Actions, Git, Docker</p></div>
-  </div>
-</section>
+    <ul class="cats" id="cats" aria-label="Categories"></ul>
+    <ul class="fan" id="fan" aria-label="Items"></ul>
+  </section>
 
-<section aria-labelledby="docs-title">
-  <div class="head"><h2 id="docs-title">Architecture and experiments</h2><p>The decisions behind the code.</p></div>
-  <div class="docs">
-    <a href="https://github.com/rodrigo1408/llm-do-zero/blob/main/docs/ARCHITECTURE.md">llm-do-zero math<span>Every layer and its derivative</span></a>
-    <a href="https://github.com/rodrigo1408/llm-do-zero/blob/main/docs/DECISIONS.md">llm-do-zero decisions<span>What was left out and why</span></a>
-    <a href="https://github.com/rodrigo1408/llm-do-zero/blob/main/results/SUMMARY.md">llm-do-zero experiments<span>Generated results, never edited by hand</span></a>
-    <div class="private">LIMIAR documentation<span>Architecture, 10 ADRs, evidence model and maintenance pipeline. Private, available on request.</span></div>
+  <div class="side">
+    <article class="detail" id="detail" aria-live="polite"></article>
+    <form class="ask" id="ask" role="search">
+      <label class="sr" for="q">Search the portfolio</label>
+      <div class="ask-field">
+        <input id="q" type="search" autocomplete="off" placeholder="Search projects, skills, experience…">
+        <button type="submit" aria-label="Open the first result"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M5 12h14M13 6l6 6-6 6"/></svg></button>
+      </div>
+      <div class="quick" aria-label="Quick searches">
+        <button type="button" data-q="Oracle">Oracle</button>
+        <button type="button" data-q="agents">Agents</button>
+        <button type="button" data-q="tests">Tests</button>
+        <button type="button" data-q="Spring Boot">Spring Boot</button>
+      </div>
+      <p class="hint">Keyword search over this page. No AI model is called.</p>
+    </form>
   </div>
-</section>
-
-<section id="experience" aria-labelledby="experience-title">
-  <div class="head"><h2 id="experience-title">Experience</h2><p>Enterprise work, mostly on systems that keep businesses running.</p></div>
-  <ol class="timeline">
-    <li><span class="when">Sep 2026 – now</span><div><h3>Independent study and LIMIAR</h3><p>Deepening modern Java and building AI-assisted development tools with Claude Code.</p></div></li>
-    <li><span class="when">Aug 2025 – now</span><div><h3>PL/SQL Developer, Hapvida Notre Dame</h3><p>Collaborating with the Support team to analyze and resolve incidents, while developing improvements and fixes for corporate applications. Developing and maintaining solutions using PL/SQL, Oracle Forms, and Oracle Reports, including implementing new features, fixing bugs, optimizing SQL queries, and enhancing performance. Supporting the Development team in analyzing issues and evolving applications.</p></div></li>
-    <li><span class="when">Jan 2025 – Jul 2026</span><div><h3>PL/SQL Support Senior, Hapvida Notre Dame</h3><p>Handled the analysis and resolution of incidents and service requests for the Authorization/Support team, addressing highly complex issues and performing bug fixes. Optimized SQL queries and Oracle Forms screens, focusing on enhancing application performance and stability. Managed and tracked the backlog, taking a proactive approach to identifying issues and reducing ticket volume.</p></div></li>
-    <li><span class="when">Apr 2022 – Sep 2024</span><div><h3>Web Developer, Grupo Portfólio, for Unimed Fortaleza</h3><p>Built Java REST services and Angular features for healthcare applications used by 1,000+ users, and maintained Oracle PL/SQL packages and procedures.</p></div></li>
-    <li><span class="when">Jul 2020 – Mar 2022</span><div><h3>PL/SQL Developer, Wipro Technologies</h3><p>Built Oracle Forms screens and Oracle Reports, tuned slow SQL queries and supported an internal legacy system.</p></div></li>
-  </ol>
-  <h3 style="font-size:15px;margin:44px 0 14px">Earlier Spring Boot practice projects</h3>
-  <div class="other">
-    <div><a href="https://github.com/rodrigo1408/api_ev">api_ev</a><p>EV battery and motor simulation API. Java 17, Spring Boot 3.3.</p></div>
-    <div><a href="https://github.com/rodrigo1408/api_atendimento">api_atendimento</a><p>Routes support requests to teams with queueing. Java 17, Spring Boot 3.3.</p></div>
-    <div><a href="https://github.com/rodrigo1408/gate-unlock">gate-unlock</a><p>Unlocks a gate from a user and access code. Java 21, Spring Boot 3.3, JPA.</p></div>
-    <div><a href="https://github.com/rodrigo1408/api_semaforo">api_semaforo</a><p>Traffic light with auto cycle, manual override and audit log. Java 21, Spring Boot 3.3.</p></div>
-  </div>
-</section>
 </main>
-</div>
 
-<footer id="contact">
-  <div class="wrap">
-    <h2>Let's talk</h2>
-    <p>I'm looking for remote Java developer roles, overlapping US and EU hours. The fastest way to reach me is email.</p>
-    <div class="actions">
-      <a class="btn primary" href="mailto:rodrigomendesbarreto@hotmail.com">Email me</a>
-      <a class="btn" href="https://www.linkedin.com/in/rodrigo-barreto-2b1ba6129">LinkedIn</a>
-      <a class="btn" href="https://github.com/rodrigo1408">GitHub</a>
-      <a class="btn" href="Rodrigo_Barreto_Resume.pdf">Resume (PDF)</a>
-    </div>
-    <p class="fine">Based in Caucaia, Brazil · Postgraduate studies in database administration and in big data management · rodrigomendesbarreto@hotmail.com</p>
+<noscript>
+  <div style="max-width:720px;margin:24px auto;padding:0 16px;color:#EEF2F0">
+    <p>Java and Oracle PL/SQL developer since 2020. Featured: LIMIAR (private multi-agent Oracle Forms → Spring Boot migration platform, 3,057 tests) and <a href="https://github.com/rodrigo1408/llm-do-zero">llm-do-zero</a> (language model from scratch in NumPy).</p>
+    <p><a href="Rodrigo_Barreto_Resume.pdf">Resume</a> · <a href="https://github.com/rodrigo1408">GitHub</a> · <a href="mailto:rodrigomendesbarreto@hotmail.com">Email</a></p>
   </div>
-</footer>
+</noscript>
+
+<script>
+const ICON = {
+  project:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M3 7l9-4 9 4-9 4z"/><path d="M3 12l9 4 9-4M3 17l9 4 9-4"/></svg>',
+  work:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><rect x="3" y="7" width="18" height="13" rx="2"/><path d="M9 7V5a2 2 0 012-2h2a2 2 0 012 2v2M3 13h18"/></svg>',
+  skill:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M8 6l-6 6 6 6M16 6l6 6-6 6"/></svg>',
+  demo:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><rect x="3" y="4" width="18" height="16" rx="2"/><path d="M10 9l5 3-5 3z"/></svg>',
+  doc:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M6 3h9l4 4v14H6z"/><path d="M14 3v5h5M9 13h7M9 17h7"/></svg>',
+  api:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><circle cx="12" cy="12" r="3"/><path d="M12 3v4M12 17v4M3 12h4M17 12h4"/></svg>',
+  spark:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M12 3l1.8 5.2L19 10l-5.2 1.8L12 17l-1.8-5.2L5 10l5.2-1.8z"/><path d="M19 15l.8 2.2L22 18l-2.2.8L19 21l-.8-2.2L16 18l2.2-.8z"/></svg>'
+};
+const arrow='<svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 6l6 6-6 6"/></svg>';
+
+/* Real validation loss of llm-do-zero's reference run (results/baseline.json), steps 0..6000 every 250. */
+const VAL_LOSS=[3.737,2.276,2.114,2.051,1.991,1.956,1.921,1.903,1.888,1.89,1.869,1.868,1.877,1.833,1.839,1.847,1.835,1.848,1.837,1.835,1.823,1.831,1.838,1.818,1.841];
+
+const job=(id,title,org,from,to,text,chips,stack)=>({id,title:`${title}, ${org}`,short:`${title} · ${org.split(",")[0]}`,subtitle:title,org,from,to,text,chips,stack});
+
+const CATS=[
+ {id:"projects",label:"Featured projects",icon:"project",items:[
+  {id:"limiar",title:"LIMIAR",short:"LIMIAR · oracle-migration-ai",chips:[["working","g"],["private","a"],["8 agents","p"]],
+   subtitle:"Multi-agent migration of Oracle Forms and Reports to Java / Spring Boot",
+   status:["Working pipeline · in development",""],note:"Figures measured on 26 Oct 2026, master branch",
+   action:{label:"Private · walkthrough on request",href:"mailto:rodrigomendesbarreto@hotmail.com?subject=LIMIAR%20walkthrough",off:true},
+   metric:{label:"Diff-gate demo",badge:"Reproducible",value:"9/9",sub:"scenarios with the expected result",tone:"teal",
+     viz:{type:"cells",pass:1,block:8,caption:"1 legitimate fix passes · 8 unauthorized changes blocked"}},
+   stats:[["3,057","Tests passing on master"],["8","Specialist agents (LangGraph)"],["10","Architecture decision records"],["0","LLM calls in the 8 validation layers"]],
+   analysis:{title:"Evidence before trust",list:["Deterministic Python extracts the facts before every AI step","The agent that generates code never validates it","Anything the XML does not support is reported as missing, never guessed","LIMIAR Maintenance: bug-fix agents open a PR only if 10 deterministic gates pass; merge is always human"]},
+   tags:["Python","LangGraph","Claude","Pydantic","pytest","GitHub Actions","Oracle Forms","Spring Boot"],
+   keywords:"oracle forms reports migration agents langgraph claude java spring boot maintenance tests ci"},
+  {id:"llm",title:"llm-do-zero",short:"llm-do-zero",chips:[["v0.1","p"],["public","g"],["NumPy","t"]],
+   subtitle:"A character-level language model built from scratch in NumPy",
+   status:["v0.1 · MLP done · Transformer next","next"],note:"No autograd, no pretrained weights",
+   action:{label:"Explore repository",href:"https://github.com/rodrigo1408/llm-do-zero"},
+   metric:{label:"Validation loss",badge:"nats/token",value:"1.84",sub:"vs. 2.39 count-based bigram and 3.74 uniform guess",tone:"cool",
+     viz:{type:"bars",values:VAL_LOSS,caption:"real validation loss, steps 0 → 6000"}},
+   stats:[["18,746","Parameters"],["37","Tests, CI on Python 3.11 and 3.13"],["5","Reproducible experiments"],["5,298","IBGE town names in the corpus"]],
+   analysis:{title:"What it shows",list:["Every backward pass checked against finite differences (relative error < 1e-6)","Train/validation/test split by sequence; test set evaluated once (1.82)","Overfitting, learning rate, context size and optimizer experiments, all generated by code"]},
+   tags:["Python","NumPy","pytest","GitHub Actions"],
+   links:[["Experiment results","https://github.com/rodrigo1408/llm-do-zero/blob/main/results/SUMMARY.md"],["The math","https://github.com/rodrigo1408/llm-do-zero/blob/main/docs/ARCHITECTURE.md"]],
+   keywords:"machine learning neural network backpropagation numpy language model python tests"}
+ ]},
+ {id:"experience",label:"Experience",icon:"work",items:[
+  job("j1","Independent study and LIMIAR","Self-directed","2026-09",null,"Deepening modern Java and building AI-assisted development tools with Claude Code.",[["now","g"],["AI","p"]],["Java","Python","Claude Code"]),
+  job("j2","PL/SQL Developer","Hapvida Notre Dame","2025-08",null,"Collaborating with the Support team to analyze and resolve incidents, while developing improvements and fixes for corporate applications. Developing and maintaining solutions using PL/SQL, Oracle Forms and Oracle Reports, including new features, bug fixes, SQL optimization and performance work.",[["now","g"],["Oracle","a"]],["PL/SQL","Oracle Forms","Oracle Reports"]),
+  job("j3","PL/SQL Support Senior","Hapvida Notre Dame","2025-01","2026-07","Handled the analysis and resolution of incidents and service requests for the Authorization/Support team, addressing highly complex issues and performing bug fixes. Optimized SQL queries and Oracle Forms screens. Managed and tracked the backlog, reducing ticket volume.",[["2025–26",""],["Oracle","a"]],["PL/SQL","Oracle Forms","SQL tuning"]),
+  job("j4","Web Developer","Grupo Portfólio, for Unimed Fortaleza","2022-04","2024-09","Built Java REST services and Angular features for healthcare applications used by 1,000+ users, and maintained Oracle PL/SQL packages and procedures.",[["2022–24",""],["Java","t"]],["Java","Angular","PL/SQL"]),
+  job("j5","PL/SQL Developer","Wipro Technologies","2020-07","2022-03","Built Oracle Forms screens and Oracle Reports, tuned slow SQL queries and supported an internal legacy system.",[["2020–22",""],["Oracle","a"]],["Oracle Forms","Oracle Reports","SQL"])
+ ]},
+ {id:"skills",label:"Skill areas",icon:"skill",items:[
+  {id:"s-backend",title:"Backend",chips:[["5 skills",""]],list:["Java","Spring Boot","REST APIs","JPA","Angular"],where:"Unimed Fortaleza web work, the four Spring Boot APIs, and LIMIAR's generated Java target"},
+  {id:"s-oracle",title:"Oracle and data",chips:[["4 skills",""]],list:["Oracle PL/SQL","Oracle Forms and Reports","SQL tuning","PostgreSQL"],where:"Wipro, Hapvida Notre Dame and Unimed Fortaleza; the source domain of LIMIAR"},
+  {id:"s-ai",title:"AI engineering",chips:[["4 skills",""]],list:["Multi-agent systems with LangGraph and Claude","Claude Code agents","Deterministic validation of AI output","Neural networks in NumPy"],where:"LIMIAR, LIMIAR Maintenance and llm-do-zero"},
+  {id:"s-quality",title:"Quality and delivery",chips:[["5 skills",""]],list:["pytest","Pydantic contracts","GitHub Actions","Git","Docker"],where:"CI on every push in LIMIAR and llm-do-zero"}
+ ]},
+ {id:"demos",label:"Demos",icon:"demo",items:[
+  {id:"d-gates",title:"LIMIAR Maintenance diff gate",short:"Maintenance diff gate",chips:[["9/9","g"],["local","t"]],
+   text:"The same check-diff command the pipeline runs on each agent's patch, applied to a throwaway clone. Output from a local run (private repository).",
+   pre:'<span class="cmd">$ python scripts/maintenance_gates_demo.py</span>\n<span class="ok">PASS   </span> legitimate fix with regression test\n<span class="no">BLOCKED</span> developer edits the agent policy\n<span class="no">BLOCKED</span> developer changes dependencies\n<span class="no">BLOCKED</span> QA edits production code\n<span class="no">BLOCKED</span> test disabled with @pytest.mark.skip\n<span class="no">BLOCKED</span> existing test deleted\n<span class="no">BLOCKED</span> credential-shaped token added\n<span class="no">BLOCKED</span> real Oracle driver imported\n<span class="no">BLOCKED</span> final diff without a regression test\n9/9 scenarios with the expected result'},
+  {id:"d-overfit",title:"Watching a model overfit",short:"llm-do-zero overfitting",chips:[["real run","p"],["public","g"]],
+   text:"Trained on only 300 names, training loss keeps falling while validation loss rises after step 500. Weight decay limits the damage.",
+   img:"assets/llm-overfitting.svg",
+   pre:'<span class="cmd">$ llmzero generate --run runs/default -n 4 --temperature 0.8</span>\nnossia\ncoronel mosal\nguaporácia\ntimpo cochos',
+   href:"https://github.com/rodrigo1408/llm-do-zero"}
+ ]},
+ {id:"docs",label:"Docs & decisions",icon:"doc",items:[
+  {id:"doc-math",title:"llm-do-zero: the math",chips:[["public","g"]],text:"Every layer, its forward pass and its hand-derived gradient.",href:"https://github.com/rodrigo1408/llm-do-zero/blob/main/docs/ARCHITECTURE.md"},
+  {id:"doc-dec",title:"llm-do-zero: decisions",chips:[["public","g"]],text:"Why NumPy without autograd, why an MLP before a Transformer, and what was left out.",href:"https://github.com/rodrigo1408/llm-do-zero/blob/main/docs/DECISIONS.md"},
+  {id:"doc-res",title:"llm-do-zero: experiment results",chips:[["generated","p"]],text:"Tables and charts produced by the code, never edited by hand.",href:"https://github.com/rodrigo1408/llm-do-zero/blob/main/results/SUMMARY.md"},
+  {id:"doc-limiar",title:"LIMIAR documentation",chips:[["private","a"]],text:"Architecture, 10 ADRs, the evidence model and the maintenance pipeline. Private, available on request.",href:null}
+ ]},
+ {id:"apis",label:"Spring Boot APIs",icon:"api",items:[
+  {id:"a-ev",title:"api_ev",chips:[["Java 17",""]],text:"Simulates an electric vehicle's battery and motor: charge and discharge, throttle-based engine power, temperature management, regenerative braking and fault diagnosis.",stack:"Java 17, Spring Boot 3.3",href:"https://github.com/rodrigo1408/api_ev"},
+  {id:"a-at",title:"api_atendimento",chips:[["Java 17",""]],text:"Distributes customer requests to card, loan and general support teams, queueing them while agents are busy. Built as a technical assessment.",stack:"Java 17, Spring Boot 3.3",href:"https://github.com/rodrigo1408/api_atendimento"},
+  {id:"a-gate",title:"gate-unlock",chips:[["Java 21",""]],text:"Unlocks a gate when it receives a valid user and access code, with persistence through Spring Data JPA.",stack:"Java 21, Spring Boot 3.3, JPA",href:"https://github.com/rodrigo1408/gate-unlock"},
+  {id:"a-sem",title:"api_semaforo",chips:[["Java 21",""]],text:"Runs a traffic light on an automatic cycle, accepts manual override and logs every state change for auditing.",stack:"Java 21, Spring Boot 3.3",href:"https://github.com/rodrigo1408/api_semaforo"}
+ ]}
+];
+CATS.forEach(c=>c.items.forEach(i=>{i.cat=c.id}));
+const ALL=CATS.flatMap(c=>c.items);
+const byId=Object.fromEntries(ALL.map(i=>[i.id,i]));
+const catOf=id=>CATS.find(c=>c.id===id);
+
+const esc=s=>String(s).replace(/[&<>"]/g,ch=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[ch]));
+const chipHTML=cs=>`<span class="chips">${cs.map(([t,k])=>`<span class="chip ${k}">${esc(t)}</span>`).join("")}</span>`;
+const ym=s=>{const [y,m]=s.split("-").map(Number);return y*12+(m-1)};
+const nowYM=()=>{const d=new Date();return d.getFullYear()*12+d.getMonth()};
+const fmtYM=s=>new Date(+s.slice(0,4),+s.slice(5)-1,1).toLocaleString("en",{month:"short",year:"numeric"});
+
+const state={cat:"projects",item:"limiar",query:""};
+const $=id=>document.getElementById(id);
+const reduce=matchMedia("(prefers-reduced-motion: reduce)").matches;
+const narrow=()=>matchMedia("(max-width:960px)").matches;
+const isList=()=>document.body.classList.contains("list");
+
+function renderCats(){
+  $("cats").innerHTML=CATS.map(c=>`<li><button class="cat" data-cat="${c.id}" aria-pressed="${!state.query&&c.id===state.cat}">
+    ${ICON[c.icon]}<b>${c.items.length}</b><span>${esc(c.label)}</span></button></li>`).join("");
+}
+function currentItems(){
+  if(!state.query)return catOf(state.cat).items;
+  const q=state.query.toLowerCase();
+  return ALL.filter(i=>JSON.stringify([i.title,i.subtitle,i.text,i.list,i.tags,i.stack,i.keywords,i.org,i.chips,i.where]).toLowerCase().includes(q));
+}
+function renderFan(){
+  const items=currentItems();
+  $("fan").innerHTML=items.length?items.map(i=>`<li><button class="item" data-item="${i.id}" aria-current="${i.id===state.item}">
+      <strong>${esc(i.short||i.title)}</strong>${chipHTML(i.chips||[])}</button></li>`).join("")
+    :`<li class="empty">Nothing matches “${esc(state.query)}”.</li>`;
+  arc();
+}
+/* Items sit on an arc around the hub, like the reference design. */
+function arc(){
+  const btns=[...$("fan").querySelectorAll(".item")];
+  const n=btns.length, mid=(n-1)/2, R=420, step=58;
+  btns.forEach((b,i)=>{
+    if(narrow()||isList()){b.style.transform="";b.style.opacity="";return}
+    const dy=(i-mid)*step, dx=Math.sqrt(Math.max(R*R-dy*dy,0))-R;
+    b.style.transform=`translateX(${dx.toFixed(1)}px)`;
+    b.style.opacity=n>4?(1-Math.abs(i-mid)/n*.6).toFixed(2):"";
+  });
+}
+
+function vizHTML(v){
+  const fig=(body)=>`<figure class="viz"><svg viewBox="0 0 100 56" preserveAspectRatio="none" role="img" aria-label="${esc(v.caption)}">${body}</svg><figcaption>${esc(v.caption)}</figcaption></figure>`;
+  if(v.type==="bars"){
+    const max=Math.max(...v.values), w=100/v.values.length;
+    return fig(v.values.map((x,i)=>{const h=x/max*52;return `<rect x="${(i*w+w*.18).toFixed(2)}" y="${(56-h).toFixed(1)}" width="${(w*.64).toFixed(2)}" height="${h.toFixed(1)}" rx=".6" fill="${i===v.values.length-1?"#C4B5FD":"rgba(196,181,253,.5)"}"/>`}).join(""));
+  }
+  if(v.type==="cells"){
+    const n=v.pass+v.block, w=100/n;
+    return fig([...Array(n)].map((_,i)=>`<rect x="${(i*w+1).toFixed(2)}" y="14" width="${(w-2).toFixed(2)}" height="28" rx="2" fill="${i<v.pass?"#4ADE80":"rgba(251,191,36,.75)"}"/>`).join(""));
+  }
+  if(v.type==="range"){
+    const start=ym("2020-01"), end=nowYM()+1, span=end-start, x=a=>(a-start)/span*100;
+    const a=ym(v.from), b=v.to?ym(v.to)+1:end;
+    let ticks="";for(let y=2021;y*12<end;y++)ticks+=`<line x1="${x(y*12).toFixed(2)}" x2="${x(y*12).toFixed(2)}" y1="20" y2="36" stroke="rgba(255,255,255,.18)" stroke-width=".4"/>`;
+    return fig(`<rect x="0" y="26" width="100" height="4" rx="2" fill="rgba(255,255,255,.08)"/>${ticks}<rect x="${x(a).toFixed(2)}" y="22" width="${(x(b)-x(a)).toFixed(2)}" height="12" rx="2" fill="#5EEAD4"/>`);
+  }
+  return "";
+}
+
+/* Normalizes any item into the detail-panel shape. */
+function view(i){
+  if(i.cat==="projects")return i;
+  const base={title:i.title,chips:i.chips};
+  if(i.cat==="experience"){
+    const months=(i.to?ym(i.to)+1:nowYM()+1)-ym(i.from), yrs=Math.floor(months/12), mo=months%12;
+    return {...base,title:i.subtitle,subtitle:i.org,status:[i.to?"Completed":"Current role",i.to?"done":""],
+      note:`${fmtYM(i.from)} – ${i.to?fmtYM(i.to):"present"}`,
+      metric:{label:"Time in role",badge:i.to?"closed":"ongoing",value:yrs?`${yrs}y ${mo}m`:`${mo}m`,sub:"computed from the dates above",tone:"teal",
+        viz:{type:"range",from:i.from,to:i.to,caption:"position on a 2020 → today timeline"}},
+      analysis:{title:"What I did",text:i.text},tags:i.stack};
+  }
+  if(i.cat==="skills")return {...base,subtitle:"Skill area",status:[`${i.list.length} skills`,"done"],note:"Only skills used in real work or in the projects here",
+      analysis:{title:"Skills",list:i.list},extra:{title:"Where they were used",text:i.where}};
+  if(i.cat==="demos")return {...base,subtitle:i.text,status:["Runs locally · no API key","next"],note:"Real output, not a mock-up",
+      action:i.href?{label:"Open repository",href:i.href}:{label:"Private repository",off:true},
+      analysis:{title:"Output",pre:i.pre,img:i.img}};
+  if(i.cat==="docs")return {...base,subtitle:i.text,status:[i.href?"Public":"Private",i.href?"":"done"],
+      action:i.href?{label:"Read on GitHub",href:i.href}:{label:"Available on request",href:"mailto:rodrigomendesbarreto@hotmail.com",off:true}};
+  return {...base,subtitle:i.text,status:["Practice project · 2024","done"],note:i.stack,
+      action:{label:"Open repository",href:i.href},tags:i.stack.split(", ")};
+}
+
+function renderDetail(){
+  const raw=byId[state.item]; if(!raw)return;
+  const d=view(raw), c=catOf(raw.cat), m=d.metric;
+  const act=d.action?(d.action.href?`<a class="go${d.action.off?" off":""}" href="${esc(d.action.href)}">${esc(d.action.label)} ${arrow}</a>`:`<span class="go off">${esc(d.action.label)}</span>`):"";
+  $("detail").innerHTML=`
+    <div class="kicker">${ICON[c.icon]}<span>${esc(c.label)}</span></div>
+    <h2>${esc(d.title)}${d.subtitle?`<span>${esc(d.subtitle)}</span>`:""}</h2>
+    <div class="statusrow"><div><span class="status ${d.status[1]}">${esc(d.status[0])}</span>${d.note?`<p>${esc(d.note)}</p>`:""}</div>${act}</div>
+    ${m?`<div class="metric ${m.tone||""}"><div class="metric-head"><span>${esc(m.label)}</span><em>${esc(m.badge)}</em></div>
+      <div class="metric-body"><div><b>${esc(m.value)}</b><small>${esc(m.sub)}</small></div>${vizHTML(m.viz)}</div></div>`:""}
+    ${d.stats?`<div class="stats">${d.stats.map(([v,l])=>`<div class="stat"><b>${esc(v)}</b><span>${esc(l)}</span></div>`).join("")}</div>`:""}
+    ${d.analysis?`<div class="section-title">${ICON.spark}<span>${raw.cat==="demos"?"Run":"Analysis"}</span></div>
+      <div class="analysis"><h3>${esc(d.analysis.title)}</h3>
+      ${d.analysis.text?`<p>${esc(d.analysis.text)}</p>`:""}
+      ${d.analysis.list?`<ul>${d.analysis.list.map(x=>`<li>${esc(x)}</li>`).join("")}</ul>`:""}
+      ${d.analysis.img?`<img src="${esc(d.analysis.img)}" width="760" height="380" alt="Loss curves: training loss falls to about 0.8 while validation loss rises from 2.3 to 3.2; weight decay limits it to 2.6.">`:""}
+      ${d.analysis.pre?`<pre>${d.analysis.pre}</pre>`:""}</div>`:""}
+    ${d.extra?`<div class="analysis"><h3>${esc(d.extra.title)}</h3><p>${esc(d.extra.text)}</p></div>`:""}
+    ${d.tags?`<div class="tagrow">${d.tags.map(t=>`<span class="chip">${esc(t)}</span>`).join("")}</div>`:""}
+    ${d.links?`<div class="links">${d.links.map(([t,h])=>`<a href="${esc(h)}">${esc(t)}</a>`).join("")}</div>`:""}`;
+}
+
+/* Wires: hub → every category, selected category (or the column's edge, when searching) → every item. */
+function curve(a,b){const dx=Math.max((b.x-a.x)*.5,30);return `M${a.x.toFixed(1)},${a.y.toFixed(1)} C${(a.x+dx).toFixed(1)},${a.y.toFixed(1)} ${(b.x-dx).toFixed(1)},${b.y.toFixed(1)} ${b.x.toFixed(1)},${b.y.toFixed(1)}`}
+function drawWires(animate){
+  const svg=$("wires");
+  if(narrow()||isList()){svg.innerHTML="";return}
+  const g=$("graph").getBoundingClientRect();
+  const left=r=>({x:r.left-g.left-4,y:r.top+r.height/2-g.top});
+  const right=r=>({x:r.right-g.left,y:r.top+r.height/2-g.top});
+  const o=document.querySelector(".orb").getBoundingClientRect();
+  const hub={x:o.right-g.left+4,y:o.top+o.height/2-g.top};
+  const cats=[...document.querySelectorAll(".cat")];
+  let out=cats.map(b=>`<path class="wire${b.getAttribute("aria-pressed")==="true"?" on":""}" d="${curve(hub,left(b.getBoundingClientRect()))}"/>`).join("");
+  const sel=cats.find(b=>b.dataset.cat===state.cat);
+  const cr=$("cats").getBoundingClientRect();
+  const src=state.query||!sel?{x:cr.right-g.left,y:cr.top+cr.height/2-g.top}:right(sel.getBoundingClientRect());
+  document.querySelectorAll(".item").forEach(b=>{
+    out+=`<path class="wire${b.getAttribute("aria-current")==="true"?" on":""}${animate&&!reduce?" draw":""}" d="${curve(src,left(b.getBoundingClientRect()))}"/>`;
+  });
+  svg.setAttribute("viewBox",`0 0 ${g.width} ${g.height}`);
+  svg.innerHTML=out;
+  svg.querySelectorAll(".draw").forEach(p=>p.style.setProperty("--len",Math.ceil(p.getTotalLength())));
+}
+
+/* Transforms on items settle with a CSS transition, so wires are redrawn after it. */
+function render(animate){
+  renderCats();renderFan();renderDetail();
+  requestAnimationFrame(()=>drawWires(animate));
+  setTimeout(()=>drawWires(false),reduce?0:400);
+}
+function selectItem(id,scroll){
+  if(!byId[id])return;
+  state.item=id;
+  if(!state.query)state.cat=byId[id].cat;
+  history.replaceState(null,"","#"+id);
+  render(false);
+  if(scroll&&narrow())$("detail").scrollIntoView({behavior:reduce?"auto":"smooth",block:"start"});
+}
+
+$("cats").addEventListener("click",e=>{
+  const b=e.target.closest(".cat"); if(!b)return;
+  state.query="";$("q").value="";
+  state.cat=b.dataset.cat; state.item=catOf(state.cat).items[0].id;
+  history.replaceState(null,"","#"+state.item);
+  render(true);
+});
+$("fan").addEventListener("click",e=>{const b=e.target.closest(".item");if(b)selectItem(b.dataset.item,true)});
+$("fan").addEventListener("keydown",e=>{
+  if(e.key!=="ArrowDown"&&e.key!=="ArrowUp")return;
+  const btns=[...document.querySelectorAll(".item")], i=btns.indexOf(document.activeElement); if(i<0)return;
+  e.preventDefault(); btns[(i+(e.key==="ArrowDown"?1:-1)+btns.length)%btns.length].focus();
+});
+$("q").addEventListener("input",e=>{state.query=e.target.value.trim();render(true)});
+$("q").addEventListener("keydown",e=>{if(e.key==="Escape"){e.target.value="";state.query="";render(true)}});
+$("ask").addEventListener("submit",e=>{e.preventDefault();const first=currentItems()[0];if(first)selectItem(first.id,true)});
+document.querySelectorAll(".quick button").forEach(b=>b.addEventListener("click",()=>{$("q").value=b.dataset.q;state.query=b.dataset.q;render(true)}));
+
+function setView(list){
+  document.body.classList.toggle("list",list);
+  $("viewGraph").setAttribute("aria-pressed",String(!list));
+  $("viewList").setAttribute("aria-pressed",String(list));
+  arc();requestAnimationFrame(()=>drawWires(false));
+}
+$("viewGraph").addEventListener("click",()=>setView(false));
+$("viewList").addEventListener("click",()=>setView(true));
+
+let resizeTimer;
+addEventListener("resize",()=>{clearTimeout(resizeTimer);resizeTimer=setTimeout(()=>{arc();drawWires(false)},80)});
+if(document.fonts)document.fonts.ready.then(()=>drawWires(false));
+
+const fromHash=decodeURIComponent(location.hash.slice(1));
+if(byId[fromHash]){state.item=fromHash;state.cat=byId[fromHash].cat}
+render(true);
+</script>
 </body>
 </html>
