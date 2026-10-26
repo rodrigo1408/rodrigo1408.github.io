@@ -4,375 +4,327 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Rodrigo Barreto, Java developer</title>
-<meta name="description" content="Java developer with 4+ years in enterprise systems, Oracle PL/SQL and Angular. Builder of LIMIAR, an AI platform that migrates Oracle Forms to Spring Boot.">
+<meta name="description" content="Java and Oracle PL/SQL developer building AI tools for legacy modernization: LIMIAR, a multi-agent platform that migrates Oracle Forms to Spring Boot, and llm-do-zero, a language model built from scratch.">
 <meta property="og:title" content="Rodrigo Barreto, Java developer">
-<meta property="og:description" content="Enterprise Java, Oracle PL/SQL and AI-assisted legacy modernization.">
+<meta property="og:description" content="Enterprise Java, Oracle PL/SQL and evidence-driven AI for legacy modernization.">
 <meta property="og:type" content="website">
-<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><circle cx='50' cy='50' r='38' fill='none' stroke='%235CE1FF' stroke-width='10' stroke-dasharray='40 14'/></svg>">
+<meta name="theme-color" content="#0B0D12">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='7' fill='%230B0D12'/><path d='M9 22V10h3v9.5h6V22z' fill='%23A3FF12'/><rect x='20' y='19.5' width='4' height='2.5' fill='%2300D9FF'/></svg>">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@500;600;700&family=Barlow:wght@400;500;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
 <style>
 :root{
---bg:#03101B; --deep:#061A2A; --ink:#DDF7FF; --muted:#7FA6BC;
---holo:#5CE1FF; --holo-dim:rgba(92,225,255,.14); --line:rgba(92,225,255,.28);
---legacy:#FFB547;
---display:"Chakra Petch","Arial Narrow",sans-serif;
---body:"Barlow","Segoe UI",system-ui,-apple-system,sans-serif;
---cut:14px;
+  --bg:#0B0D12; --surface:#151923; --border:#292F3A;
+  --text:#F5F7FA; --muted:#A0A8B7;
+  --lime:#A3FF12; --cyan:#00D9FF;
+  --sans:"Inter","Segoe UI",system-ui,-apple-system,sans-serif;
+  --mono:"JetBrains Mono",ui-monospace,Consolas,monospace;
+  --radius:10px;
 }
 *{box-sizing:border-box}
 html{scroll-behavior:smooth}
-body{margin:0;color:var(--ink);font:400 17px/1.6 var(--body);-webkit-font-smoothing:antialiased;
-background:
-radial-gradient(ellipse at 70% -10%,rgba(92,225,255,.16),transparent 55%),
-linear-gradient(rgba(92,225,255,.05) 1px,transparent 1px) 0 0/48px 48px,
-linear-gradient(90deg,rgba(92,225,255,.05) 1px,transparent 1px) 0 0/48px 48px,
-var(--bg);
-background-attachment:fixed}
-body::after{content:"";position:fixed;inset:0;pointer-events:none;z-index:50;
-background:repeating-linear-gradient(0deg,rgba(0,0,0,.18) 0 1px,transparent 1px 3px);opacity:.5}
-a{color:var(--holo);text-underline-offset:3px}
-a:focus-visible,button:focus-visible{outline:2px solid var(--ink);outline-offset:3px}
-.wrap{max-width:1100px;margin:0 auto;padding:0 24px}
-code{font-family:ui-monospace,Consolas,monospace;font-size:.88em;color:var(--holo)}
-h1,h2,h3{font-family:var(--display);font-weight:600}
-
-/* boot sequence: the one orchestrated moment */
-.boot{position:fixed;inset:0;z-index:100;background:var(--bg);display:grid;place-items:center;
-transition:opacity .5s ease,visibility .5s}
-.boot.done{opacity:0;visibility:hidden}
-.boot-in{display:grid;justify-items:center;gap:22px}
-.boot svg{width:120px;height:120px}
-.boot .r1{transform-origin:60px 60px;animation:spin 1.4s linear infinite}
-.boot .r2{transform-origin:60px 60px;animation:spin 2.2s linear infinite reverse}
-.boot p{margin:0;font:500 15px/1.4 var(--display);color:var(--holo);min-height:1.4em;letter-spacing:.06em}
-.boot .meter{width:220px;height:3px;background:var(--holo-dim)}
-.boot .meter i{display:block;height:100%;width:0;background:var(--holo);box-shadow:0 0 12px var(--holo);transition:width .25s}
-@keyframes spin{to{transform:rotate(360deg)}}
-
-/* panels with clipped HUD corners */
-.hud{position:relative;background:linear-gradient(180deg,rgba(6,26,42,.88),rgba(6,26,42,.6));
-clip-path:polygon(var(--cut) 0,100% 0,100% calc(100% - var(--cut)),calc(100% - var(--cut)) 100%,0 100%,0 var(--cut));
-border:1px solid var(--line)}
-.hud::before{content:"";position:absolute;left:0;top:0;width:40%;height:2px;background:var(--holo);box-shadow:0 0 10px var(--holo)}
+body{margin:0;background:var(--bg);color:var(--text);font:400 16px/1.65 var(--sans);-webkit-font-smoothing:antialiased}
+a{color:var(--cyan);text-underline-offset:3px;text-decoration-thickness:1px}
+a:hover{color:var(--text)}
+:focus-visible{outline:2px solid var(--lime);outline-offset:3px;border-radius:4px}
+.wrap{max-width:1040px;margin:0 auto;padding:0 24px}
+h1,h2,h3{margin:0;line-height:1.2;font-weight:600;letter-spacing:-.01em}
+p{margin:0}
+code,pre,.mono{font-family:var(--mono)}
+code{font-size:.9em;color:var(--text);background:var(--surface);border:1px solid var(--border);border-radius:5px;padding:1px 6px}
+.skip{position:absolute;left:-999px;top:8px;background:var(--lime);color:var(--bg);padding:8px 12px;border-radius:6px;font-weight:600}
+.skip:focus{left:16px}
 
 /* header */
-.top{display:flex;justify-content:space-between;align-items:center;gap:16px;padding:28px 0;flex-wrap:wrap;border-bottom:1px solid var(--line)}
-.me{display:flex;align-items:center;gap:12px;font:700 22px/1 var(--display);color:var(--ink);text-decoration:none;letter-spacing:.03em}
-.me svg{width:34px;height:34px}
-.me .spin{transform-origin:17px 17px;animation:spin 8s linear infinite}
-.top nav{display:flex;gap:6px;flex-wrap:wrap}
-.top nav a{color:var(--ink);text-decoration:none;font:500 15px/1 var(--display);padding:10px 14px;border:1px solid transparent}
-.top nav a:hover{border-color:var(--line);color:var(--holo);background:var(--holo-dim)}
+.top{display:flex;align-items:center;justify-content:space-between;gap:16px;padding:22px 0;border-bottom:1px solid var(--border)}
+.brand{display:flex;align-items:center;gap:10px;color:var(--text);text-decoration:none;font-weight:600}
+.brand i{width:10px;height:10px;border-radius:2px;background:var(--lime)}
+.top nav{display:flex;gap:4px;flex-wrap:wrap}
+.top nav a{color:var(--muted);text-decoration:none;font-size:14px;padding:8px 10px;border-radius:6px}
+.top nav a:hover{color:var(--text);background:var(--surface)}
 
 /* hero */
-.hero{padding:64px 0 72px;display:grid;grid-template-columns:minmax(0,1.5fr) minmax(0,1fr);gap:48px;align-items:center}
-.hero h1{font-size:clamp(34px,5.4vw,60px);line-height:1.05;margin:0 0 24px;max-width:19ch;color:var(--ink);
-text-shadow:0 0 24px rgba(92,225,255,.35)}
-.hero p{margin:0;color:var(--muted);max-width:52ch;font-size:19px}
-.facts{padding:24px 26px;display:grid;gap:16px}
-.facts div{display:grid;padding-left:14px;border-left:2px solid var(--holo)}
-.facts b{font:600 16px/1.3 var(--display);color:var(--ink)}
-.facts span{color:var(--muted);font-size:15px}
-
-/* featured project */
-.limiar{padding:clamp(24px,4vw,48px);margin-bottom:96px;--cut:26px}
-.limiar-head{display:flex;justify-content:space-between;gap:24px;flex-wrap:wrap;align-items:flex-start}
-.limiar h2{font-size:clamp(40px,6vw,64px);line-height:1;margin:0;letter-spacing:.08em;color:var(--holo);text-shadow:0 0 18px rgba(92,225,255,.5)}
-.limiar .tag{color:var(--muted);margin:10px 0 0;font-size:18px}
-.links{display:flex;gap:12px;flex-wrap:wrap}
-.btn{display:inline-block;padding:11px 20px;font:600 15px/1 var(--display);text-decoration:none;color:var(--holo);
-border:1px solid var(--holo);clip-path:polygon(8px 0,100% 0,100% calc(100% - 8px),calc(100% - 8px) 100%,0 100%,0 8px)}
-.btn.solid{background:var(--holo);color:var(--bg)}
-.btn:hover{background:var(--ink);color:var(--bg);border-color:var(--ink)}
-.limiar .lede{max-width:64ch;margin:20px 0 40px}
-
-/* pipeline as an orbital scanner */
-.scanner{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:40px;align-items:center}
-.orbit{position:relative;width:100%;max-width:440px;aspect-ratio:1;margin:0 auto;list-style:none;padding:0}
-.orbit .rings{position:absolute;inset:0;width:100%;height:100%;pointer-events:none}
-.orbit .slow{transform-origin:50% 50%;animation:spin 40s linear infinite}
-.orbit .fast{transform-origin:50% 50%;animation:spin 14s linear infinite reverse}
-.orbit .core{position:absolute;inset:34%;border-radius:50%;display:grid;place-items:center;text-align:center;
-background:radial-gradient(circle,rgba(92,225,255,.18),transparent 70%)}
-.orbit .core b{display:block;font:700 44px/1 var(--display);color:var(--holo)}
-.orbit .core span{font:500 13px/1.2 var(--display);color:var(--muted)}
-.orbit li{position:absolute;left:var(--x);top:var(--y);transform:translate(-50%,-50%)}
-.stage{all:unset;cursor:pointer;display:grid;justify-items:center;gap:6px}
-.dot{width:46px;height:46px;border-radius:50%;display:grid;place-items:center;background:var(--bg);
-border:2px solid var(--holo);font:700 15px/1 var(--display);color:var(--holo);transition:background .2s,color .2s,box-shadow .2s}
-.stage .name{font:500 13px/1 var(--display);color:var(--muted);background:var(--bg);padding:2px 4px}
-.legacy .dot{border-color:var(--legacy);color:var(--legacy)}
-.stage[aria-selected="true"] .dot{background:var(--holo);color:var(--bg);box-shadow:0 0 0 6px var(--holo-dim),0 0 22px var(--holo)}
-.legacy .stage[aria-selected="true"] .dot{background:var(--legacy);box-shadow:0 0 0 6px rgba(255,181,71,.15),0 0 22px var(--legacy)}
-.stage[aria-selected="true"] .name{color:var(--ink)}
-.stage:hover .dot{box-shadow:0 0 16px var(--holo)}
-.stage:focus-visible .dot{outline:2px solid var(--ink);outline-offset:4px}
-.panel{padding:26px 28px;min-height:220px}
-.panel .step{font:500 14px/1 var(--display);color:var(--holo);margin:0 0 10px}
-.panel h3{margin:0 0 10px;font-size:26px;line-height:1.2;color:var(--ink)}
-.panel p{margin:0}
-.panel .who{margin-top:14px;font-size:15px;color:var(--muted)}
-
-.numbers{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:24px;margin:48px 0 0;padding:28px 0 0;border-top:1px solid var(--line)}
-.numbers b{display:block;font:700 40px/1 var(--display);color:var(--holo);text-shadow:0 0 14px rgba(92,225,255,.45)}
-.numbers span{color:var(--muted);font-size:15px}
-.stack{display:flex;flex-wrap:wrap;gap:8px;margin-top:28px}
-.chip{font:500 14px/1 var(--display);padding:8px 12px;border:1px solid var(--line);color:var(--ink);background:var(--holo-dim)}
+.hero{padding:88px 0 72px;max-width:760px}
+.eyebrow{font:500 13px/1 var(--mono);color:var(--lime);margin-bottom:20px}
+.hero h1{font-size:clamp(30px,4.6vw,46px);font-weight:700;margin-bottom:20px}
+.hero h1 em{font-style:normal;color:var(--lime)}
+.hero p{color:var(--muted);font-size:18px;max-width:60ch}
+.pipeline{margin-top:36px;display:flex;flex-wrap:wrap;align-items:center;gap:6px;font:400 13px/1 var(--mono);color:var(--muted)}
+.pipeline span{padding:7px 10px;border:1px solid var(--border);border-radius:6px;background:var(--surface)}
+.pipeline span:last-child{border-color:var(--lime);color:var(--lime)}
+.pipeline b{font-weight:400;color:var(--border)}
+.actions{display:flex;gap:10px;flex-wrap:wrap;margin-top:36px}
+.btn{display:inline-flex;align-items:center;gap:8px;padding:10px 16px;border-radius:8px;font-weight:600;font-size:15px;text-decoration:none;border:1px solid var(--border);color:var(--text);background:var(--surface)}
+.btn:hover{border-color:var(--muted);color:var(--text)}
+.btn.primary{background:var(--lime);border-color:var(--lime);color:var(--bg)}
+.btn.primary:hover{background:var(--text);border-color:var(--text);color:var(--bg)}
 
 /* sections */
-section.block{margin-bottom:96px}
-.block h2{font-size:clamp(28px,4vw,40px);line-height:1.1;margin:0 0 8px;color:var(--ink)}
-.block .sub{color:var(--muted);margin:0 0 32px}
-.projects{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:20px}
-.proj{padding:24px 26px;display:grid;gap:10px;align-content:start}
-.proj h3{margin:0;font-size:21px;line-height:1.3}
-.proj h3 a{color:var(--ink);text-decoration:none}
-.proj h3 a:hover{color:var(--holo)}
-.proj p{margin:0}
-.proj .tech{color:var(--holo);font:500 14px/1.3 var(--display)}
+section{padding:64px 0;border-top:1px solid var(--border)}
+.head{display:flex;justify-content:space-between;align-items:baseline;gap:16px;flex-wrap:wrap;margin-bottom:28px}
+.head h2{font-size:24px}
+.head p{color:var(--muted);font-size:15px}
 
-.timeline{list-style:none;margin:0;padding:0;border-left:1px solid var(--line);margin-left:7px}
-.timeline li{position:relative;padding:0 0 36px 30px}
-.timeline li::before{content:"";position:absolute;left:-8px;top:6px;width:14px;height:14px;transform:rotate(45deg);
-background:var(--bg);border:2px solid var(--holo)}
-.timeline li:first-child::before{background:var(--holo);box-shadow:0 0 12px var(--holo)}
-.timeline .when{color:var(--holo);font:500 15px/1 var(--display)}
-.timeline h3{margin:6px 0 4px;font-size:20px;line-height:1.3}
-.timeline p{margin:0;max-width:66ch;color:var(--muted)}
+/* projects */
+.projects{display:grid;gap:20px}
+.card{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:28px}
+.card-top{display:flex;justify-content:space-between;align-items:flex-start;gap:16px;flex-wrap:wrap;margin-bottom:14px}
+.card h3{font-size:22px}
+.card h3 small{display:block;font:400 13px/1.4 var(--mono);color:var(--muted);margin-top:6px}
+.status{display:inline-flex;align-items:center;gap:8px;font:500 12px/1 var(--mono);color:var(--text);border:1px solid var(--border);border-radius:999px;padding:6px 10px;white-space:nowrap}
+.status::before{content:"";width:7px;height:7px;border-radius:50%;background:var(--lime)}
+.status.next::before{background:var(--cyan)}
+.card > p{color:var(--muted);max-width:72ch}
+.grid2{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:24px;margin-top:22px}
+.card h4{margin:0 0 10px;font-size:13px;font-weight:600;color:var(--text);text-transform:uppercase;letter-spacing:.06em}
+.list{list-style:none;margin:0;padding:0;display:grid;gap:8px;font-size:15px;color:var(--muted)}
+.list li{padding-left:16px;position:relative}
+.list li::before{content:"";position:absolute;left:0;top:.7em;width:6px;height:2px;background:var(--lime)}
+.list b{color:var(--text);font-weight:600}
+.tags{display:flex;flex-wrap:wrap;gap:6px;margin-top:22px}
+.tags span{font:400 12px/1 var(--mono);color:var(--muted);border:1px solid var(--border);border-radius:5px;padding:6px 8px}
+.links{display:flex;gap:18px;flex-wrap:wrap;margin-top:22px;font-size:15px}
 
-footer{padding:48px clamp(24px,4vw,48px) 56px;margin:40px 0 48px;--cut:26px}
-footer h2{font-size:clamp(30px,4vw,44px);line-height:1.1;margin:0 0 12px;color:var(--holo)}
-footer p{color:var(--muted);margin:0 0 24px;max-width:56ch}
-.small{color:var(--muted);font-size:15px;margin-top:32px}
+/* demos */
+.demos{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:20px}
+.demo{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:22px;display:grid;gap:14px;align-content:start}
+.demo h3{font-size:17px}
+.demo p{color:var(--muted);font-size:14px}
+.demo img{width:100%;height:auto;border-radius:8px;border:1px solid var(--border);display:block}
+pre{margin:0;background:var(--bg);border:1px solid var(--border);border-radius:8px;padding:14px;overflow-x:auto;font-size:12.5px;line-height:1.7;color:var(--muted)}
+pre .cmd{color:var(--text)}
+pre .ok{color:var(--lime)}
+pre .no{color:var(--cyan)}
+
+/* skills */
+.skills{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:20px}
+.skills h3{font-size:15px;margin-bottom:10px}
+.skills p{color:var(--muted);font-size:14px}
+
+/* docs */
+.docs{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px}
+.docs a{display:block;text-decoration:none;color:var(--text);background:var(--surface);border:1px solid var(--border);border-radius:8px;padding:14px 16px;font-size:15px}
+.docs a span{display:block;color:var(--muted);font-size:13px;margin-top:4px}
+.docs a:hover{border-color:var(--cyan)}
+
+/* experience */
+.timeline{list-style:none;margin:0;padding:0;display:grid;gap:28px}
+.timeline li{display:grid;grid-template-columns:170px minmax(0,1fr);gap:24px}
+.when{font:400 13px/1.9 var(--mono);color:var(--muted)}
+.timeline h3{font-size:17px;margin-bottom:6px}
+.timeline p{color:var(--muted);font-size:15px;max-width:70ch}
+.other{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px 32px;margin-top:8px}
+.other a{font-weight:600}
+.other p{color:var(--muted);font-size:14px}
+
+footer{border-top:1px solid var(--border);padding:56px 0 64px}
+footer h2{font-size:24px;margin-bottom:10px}
+footer > .wrap > p{color:var(--muted);max-width:60ch}
+.fine{margin-top:40px;color:var(--muted);font-size:13px}
 
 @media (max-width:860px){
-.hero{grid-template-columns:1fr;gap:32px;padding-top:40px}
-.scanner{grid-template-columns:1fr}
-.projects{grid-template-columns:1fr}
-.numbers{grid-template-columns:1fr;gap:18px}
+  .grid2,.demos,.other{grid-template-columns:1fr}
+  .skills{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .docs{grid-template-columns:1fr 1fr}
 }
-@media (max-width:520px){
-.orbit{aspect-ratio:auto;max-width:none;display:grid;gap:10px}
-.orbit .rings,.orbit .core{display:none}
-.orbit li{position:static;transform:none}
-.stage{grid-template-columns:46px 1fr;justify-items:start;align-items:center;gap:14px;width:100%}
-.stage .name{font-size:15px}
+@media (max-width:560px){
+  .wrap{padding:0 16px}
+  .top{flex-direction:column;align-items:flex-start}
+  .hero{padding:56px 0 48px}
+  .card{padding:20px}
+  .skills,.docs{grid-template-columns:1fr}
+  .timeline li{grid-template-columns:1fr;gap:4px}
 }
-@media (prefers-reduced-motion: reduce){
-html{scroll-behavior:auto}
-*{animation:none!important;transition:none!important}
-.boot{display:none}
-}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
 </style>
 </head>
 <body>
-
-<div class="boot" id="boot" aria-hidden="true">
-<div class="boot-in">
-<svg viewBox="0 0 120 120">
-<circle cx="60" cy="60" r="54" fill="none" stroke="rgba(92,225,255,.2)" stroke-width="1"/>
-<circle class="r1" cx="60" cy="60" r="48" fill="none" stroke="#5CE1FF" stroke-width="3" stroke-dasharray="60 30 20 30"/>
-<circle class="r2" cx="60" cy="60" r="36" fill="none" stroke="#5CE1FF" stroke-width="1.5" stroke-dasharray="4 6"/>
-</svg>
-<p id="bootText"></p>
-<div class="meter"><i id="bootMeter"></i></div>
-</div>
-</div>
+<a class="skip" href="#main">Skip to content</a>
 
 <div class="wrap">
-
 <header class="top">
-<a class="me" href="#">
-<svg viewBox="0 0 34 34" aria-hidden="true"><circle cx="17" cy="17" r="15" fill="none" stroke="rgba(92,225,255,.35)"/><circle class="spin" cx="17" cy="17" r="11" fill="none" stroke="#5CE1FF" stroke-width="2.5" stroke-dasharray="18 7"/><circle cx="17" cy="17" r="3" fill="#5CE1FF"/></svg>
-Rodrigo Barreto</a>
-<nav aria-label="Main">
-<a href="#limiar">LIMIAR</a>
-<a href="#projects">Projects</a>
-<a href="#experience">Experience</a>
-<a href="#contact">Contact</a>
-</nav>
+  <a class="brand" href="#"><i aria-hidden="true"></i>Rodrigo Barreto</a>
+  <nav aria-label="Main">
+    <a href="#projects">Projects</a>
+    <a href="#demos">Demos</a>
+    <a href="#skills">Skills</a>
+    <a href="#experience">Experience</a>
+    <a href="#contact">Contact</a>
+    <a href="https://github.com/rodrigo1408">GitHub</a>
+  </nav>
 </header>
 
-<section class="hero">
-<div>
-<h1>I know what's inside legacy Oracle systems, and how to bring them to modern Java.</h1>
-<p>I'm a Java developer from Brazil with 4+ years building enterprise systems with Java, Oracle PL/SQL and Angular, including REST services for a large healthcare cooperative. Today I'm building AI tools that migrate legacy Oracle Forms to Spring Boot.</p>
+<main id="main">
+<div class="hero">
+  <p class="eyebrow">Java · Oracle PL/SQL · applied AI</p>
+  <h1>I modernize legacy Oracle systems with AI that has to <em>show its evidence</em>.</h1>
+  <p>Java and Oracle PL/SQL developer from Brazil, working on enterprise systems since 2020, including REST services for a large healthcare cooperative. I build multi-agent tools that migrate Oracle Forms to Spring Boot, where deterministic code extracts the facts and every AI step is checked before it counts.</p>
+  <div class="pipeline" aria-label="LIMIAR pipeline: legacy, analysis, knowledge, architecture, implementation, validation">
+    <span>legacy XML</span><b>→</b><span>analysis</span><b>→</b><span>business rules</span><b>→</b><span>architecture</span><b>→</b><span>Java</span><b>→</b><span>validated</span>
+  </div>
+  <div class="actions">
+    <a class="btn primary" href="#projects">See the projects</a>
+    <a class="btn" href="Rodrigo_Barreto_Resume.pdf">Resume (PDF)</a>
+  </div>
 </div>
-<div class="facts hud">
-<div><b>Based in Caucaia, Brazil</b><span>Open to remote roles, overlapping US and EU hours</span></div>
-<div><b>Java, Spring Boot, Oracle PL/SQL</b><span>Plus Angular, PostgreSQL, Git and Jira</span></div>
-<div><b>Postgraduate in data</b><span>Database administration, and big data management</span></div>
-</div>
+
+<section id="projects" aria-labelledby="projects-title">
+  <div class="head"><h2 id="projects-title">Featured projects</h2><p>Status reflects what runs today, not what is planned.</p></div>
+  <div class="projects">
+
+    <article class="card">
+      <div class="card-top">
+        <h3>LIMIAR<small>oracle-migration-ai · Python · LangGraph · Claude</small></h3>
+        <span class="status">Working pipeline · in development</span>
+      </div>
+      <p>Oracle Forms and Reports hide years of business rules inside triggers and PL/SQL. Migrations fail when a rule is lost, or when one is invented. LIMIAR reads Forms/Reports exported as XML, reconstructs what the system does, designs a Spring Boot architecture and generates Java code that must pass independent validation. Anything the XML does not support is reported as missing, never guessed.</p>
+      <div class="grid2">
+        <div>
+          <h4>How it works</h4>
+          <ul class="list">
+            <li>8 specialist agents orchestrated by a LangGraph state machine, with SQLite checkpointing and crash recovery</li>
+            <li>Deterministic extraction before every AI step; Oracle metadata turned into database dependency contracts</li>
+            <li>Eight validation layers with zero LLM calls, enforced by a test; the generating agent never validates itself</li>
+            <li><b>LIMIAR Maintenance:</b> Investigator → Developer → QA → Reviewer agents fix queued bugs; a PR opens only if 10 deterministic gates pass, and merge is always human</li>
+          </ul>
+        </div>
+        <div>
+          <h4>Verifiable evidence</h4>
+          <ul class="list">
+            <li><b>3,057 tests</b> passing on <code>master</code> (local run, Oct 2026)</li>
+            <li>CI runs the full suite on every push and pull request</li>
+            <li>Reproducible gate demo: <b>9/9 scenarios</b> (1 legitimate fix passes, 8 unauthorized changes blocked)</li>
+            <li>A real end-to-end migration case study, with every verdict shown, including the failing ones</li>
+          </ul>
+        </div>
+      </div>
+      <div class="tags"><span>Python</span><span>LangGraph</span><span>Claude</span><span>Pydantic</span><span>pytest</span><span>GitHub Actions</span><span>Oracle Forms</span><span>Java / Spring Boot</span></div>
+      <div class="links">
+        <a href="https://github.com/rodrigo1408/oracle-migration-ai">Repository</a>
+        <a href="https://github.com/rodrigo1408/oracle-migration-ai/blob/master/docs/PORTFOLIO.md">Five-minute summary</a>
+        <a href="https://github.com/rodrigo1408/oracle-migration-ai/blob/master/docs/MIGRATION_CASE_STUDIES.md">Case study</a>
+      </div>
+    </article>
+
+    <article class="card">
+      <div class="card-top">
+        <h3>llm-do-zero<small>Python · NumPy · no autograd, no pretrained weights</small></h3>
+        <span class="status next">v0.1 · MLP done · Transformer next</span>
+      </div>
+      <p>A character-level language model written from scratch to show how language models learn: tokenizer, embeddings, hand-derived backpropagation, AdamW, training and sampling. It learns to invent Brazilian town names from the 5,298 official names published by IBGE.</p>
+      <div class="grid2">
+        <div>
+          <h4>What is implemented</h4>
+          <ul class="list">
+            <li>Every backward pass checked against finite differences (relative error &lt; 1e-6)</li>
+            <li>Sequence-level train/validation/test split; test set evaluated once</li>
+            <li>Five reproducible experiments: learning rate, context size, optimizer, overfitting, weight decay</li>
+          </ul>
+        </div>
+        <div>
+          <h4>Measured results</h4>
+          <ul class="list">
+            <li>Validation loss <b>1.84</b> nats/token vs. 2.39 for a count-based bigram and 3.74 for a uniform guess</li>
+            <li>37 tests; identical results across runs on the same machine</li>
+          </ul>
+        </div>
+      </div>
+      <div class="tags"><span>Python</span><span>NumPy</span><span>pytest</span><span>GitHub Actions</span></div>
+      <div class="links">
+        <a href="https://github.com/rodrigo1408/llm-do-zero">Repository</a>
+        <a href="https://github.com/rodrigo1408/llm-do-zero/blob/main/results/SUMMARY.md">Experiment results</a>
+      </div>
+    </article>
+
+  </div>
 </section>
 
-<article class="limiar hud" id="limiar" aria-labelledby="limiar-title">
-<div class="limiar-head">
-<div>
-<h2 id="limiar-title">LIMIAR</h2>
-<p class="tag">From legacy to evolution: an AI platform for modernizing legacy systems.</p>
-</div>
-<div class="links">
-<a class="btn solid" href="https://github.com/rodrigo1408/oracle-migration-ai">View the code</a>
-<a class="btn" href="https://github.com/rodrigo1408/oracle-migration-ai/blob/master/docs/PORTFOLIO.md">Read the summary</a>
-</div>
-</div>
-<p class="lede">Old Oracle Forms and Reports systems hide years of business rules inside triggers and PL/SQL. Migrations fail when a rule gets lost, or when one gets invented. LIMIAR's first pipeline, <code>oracle-migration-ai</code>, reads Forms and Reports exported as XML, reconstructs what the system actually does, and produces a Java and Spring Boot version that has to pass review before it counts as done. Select a stage to see how it works.</p>
-
-<div class="scanner">
-<ol class="orbit" role="tablist" aria-label="Migration pipeline stages" id="track">
-<svg class="rings" viewBox="0 0 440 440" aria-hidden="true">
-<circle cx="220" cy="220" r="170" fill="none" stroke="rgba(92,225,255,.35)" stroke-width="1.5"/>
-<circle class="slow" cx="220" cy="220" r="196" fill="none" stroke="rgba(92,225,255,.25)" stroke-width="1" stroke-dasharray="2 8"/>
-<circle class="fast" cx="220" cy="220" r="140" fill="none" stroke="#5CE1FF" stroke-width="2" stroke-dasharray="120 60 30 60" opacity=".7"/>
-<circle class="slow" cx="220" cy="220" r="112" fill="none" stroke="rgba(92,225,255,.3)" stroke-width="6" stroke-dasharray="1 5"/>
-</svg>
-<div class="core" aria-hidden="true"><div><b id="coreNum">1/7</b><span>stage</span></div></div>
-</ol>
-<div class="panel hud" role="tabpanel" id="panel" aria-live="polite"></div>
-</div>
-
-<div class="numbers">
-<div><b>8</b><span>specialized agents, each with one narrow job</span></div>
-<div><b>1,800+</b><span>automated tests with pytest</span></div>
-<div><b>7</b><span>stages, from legacy XML to reviewed Java</span></div>
-</div>
-<div class="stack" aria-label="Technologies">
-<span class="chip">Python</span><span class="chip">LangGraph</span><span class="chip">Claude</span><span class="chip">Pydantic</span><span class="chip">SQLite checkpointing</span><span class="chip">pytest</span><span class="chip">Java and Spring Boot output</span><span class="chip">Oracle Forms and Reports input</span>
-</div>
-</article>
-
-<section class="block" id="projects">
-<h2>Other projects</h2>
-<p class="sub">Smaller REST APIs built with Spring Boot 3 to practice domain modeling and API design.</p>
-<div class="projects">
-<div class="proj hud">
-<h3><a href="https://github.com/rodrigo1408/api_ev">EV battery API</a></h3>
-<p>Simulates an electric vehicle's battery and motor: charge and discharge, engine power from throttle position, temperature management, regenerative braking and fault diagnosis.</p>
-<span class="tech">Java 17, Spring Boot 3.3</span>
-</div>
-<div class="proj hud">
-<h3><a href="https://github.com/rodrigo1408/api_atendimento">Support ticket router</a></h3>
-<p>Distributes customer requests to card, loan and general support teams, queueing them while agents are busy. Built as a technical assessment.</p>
-<span class="tech">Java 17, Spring Boot 3.3</span>
-</div>
-<div class="proj hud">
-<h3><a href="https://github.com/rodrigo1408/gate-unlock">Gate unlock API</a></h3>
-<p>Unlocks a gate when it receives a valid user and access code, with persistence through Spring Data JPA.</p>
-<span class="tech">Java 21, Spring Boot 3.3, JPA</span>
-</div>
-<div class="proj hud">
-<h3><a href="https://github.com/rodrigo1408/api_semaforo">Traffic light API</a></h3>
-<p>Runs a traffic light on an automatic cycle, accepts manual override and logs every state change for auditing.</p>
-<span class="tech">Java 21, Spring Boot 3.3</span>
-</div>
-</div>
+<section id="demos" aria-labelledby="demos-title">
+  <div class="head"><h2 id="demos-title">Demos</h2><p>Both run locally, with no API key and no cost.</p></div>
+  <div class="demos">
+    <div class="demo">
+      <h3>LIMIAR Maintenance: the diff gate</h3>
+      <p>The same <code>check-diff</code> command the pipeline runs on each agent's patch, applied to a throwaway clone.</p>
+<pre><span class="cmd">$ python scripts/maintenance_gates_demo.py</span>
+<span class="ok">PASS   </span> legitimate fix with regression test
+<span class="no">BLOCKED</span> developer edits the agent policy
+<span class="no">BLOCKED</span> QA edits production code
+<span class="no">BLOCKED</span> test disabled with @pytest.mark.skip
+<span class="no">BLOCKED</span> existing test deleted
+<span class="no">BLOCKED</span> credential-shaped token added
+<span class="no">BLOCKED</span> real Oracle driver imported
+<span class="no">BLOCKED</span> final diff without a regression test
+9/9 scenarios with the expected result</pre>
+      <a href="https://github.com/rodrigo1408/oracle-migration-ai/blob/master/docs/MAINTENANCE_GATES_DEMO.md">Read the demo</a>
+    </div>
+    <div class="demo">
+      <h3>llm-do-zero: watching a model overfit</h3>
+      <p>Trained on only 300 names, training loss keeps falling while validation loss rises after step 500.</p>
+      <img src="assets/llm-overfitting.svg" width="760" height="380" loading="lazy" alt="Loss curves: training loss falls to about 0.8 while validation loss rises from 2.3 to 3.2; weight decay limits validation loss to 2.6.">
+<pre><span class="cmd">$ llmzero generate --run runs/default -n 4 --temperature 0.8</span>
+nossia
+coronel mosal
+guaporácia
+timpo cochos</pre>
+    </div>
+  </div>
 </section>
 
-<section class="block" id="experience">
-<h2>Experience</h2>
-<p class="sub">Enterprise work, mostly on systems that keep businesses running.</p>
-<ol class="timeline">
-<li>
-<span class="when">Set 2026 to now</span>
-<h3>Independent study and LIMIAR</h3>
-<p>Deepening modern Java and building AI-assisted development tools with Claude Code.</p>
-</li>
-<li>
-<span class="when">Ago 2025 to now</span>
-<h3>PL/SQL Developer, Hapvida Notre Dame</h3>
-<p>Collaborating with the Support team to analyze and resolve incidents, while developing improvements and fixes for corporate applications. Developing and maintaining solutions using PL/SQL, Oracle Forms, and Oracle Reports, including implementing new features, fixing bugs, optimizing SQL queries, and enhancing performance. Supporting the Development team in analyzing issues and evolving applications.</p>
-</li>  
-<li>  
-<span class="when">Jan 2025 to Jul 2026</span>
-<h3>PL/SQL Suport Senior, Hapvida Notre Dame</h3>
-<p>Handled the analysis and resolution of incidents and service requests for the Authorization/Support team, addressing highly complex issues and performing bug fixes. Optimized SQL queries and Oracle Forms screens, focusing on enhancing application performance and stability. Managed and tracked the backlog, taking a proactive approach to identifying issues and reducing ticket volume.</p>
-</li>  
-<li>
-<span class="when">Apr 2022 to Sep 2024</span>
-<h3>Web Developer, Grupo Portfólio, for Unimed Fortaleza</h3>
-<p>Built Java REST services and Angular features for healthcare applications used by 1,000+ users, and maintained Oracle PL/SQL packages and procedures.</p>
-</li>
-<li>
-<span class="when">Jul 2020 to Mar 2022</span>
-<h3>PL/SQL Developer, Wipro Technologies</h3>
-<p>Built Oracle Forms screens and Oracle Reports, tuned slow SQL queries and supported an internal legacy system.</p>
-</li>
-</ol>
+<section id="skills" aria-labelledby="skills-title">
+  <div class="head"><h2 id="skills-title">Skills</h2><p>Grouped by what I use them for.</p></div>
+  <div class="skills">
+    <div><h3>Backend</h3><p>Java, Spring Boot, REST APIs, JPA, Angular</p></div>
+    <div><h3>Oracle and data</h3><p>Oracle PL/SQL, Oracle Forms and Reports, SQL tuning, PostgreSQL</p></div>
+    <div><h3>AI engineering</h3><p>Multi-agent systems with LangGraph and Claude, Claude Code agents, deterministic validation of AI output, neural networks in NumPy</p></div>
+    <div><h3>Quality and delivery</h3><p>pytest, Pydantic contracts, GitHub Actions, Git, Docker</p></div>
+  </div>
 </section>
 
-<footer id="contact" class="hud">
-<h2>Let's talk</h2>
-<p>I'm looking for remote Java developer roles. The fastest way to reach me is email.</p>
-<div class="links">
-<a class="btn solid" href="mailto:rodrigomendesbarreto@hotmail.com">Email me</a>
-<a class="btn" href="https://www.linkedin.com/in/rodrigo-barreto-2b1ba6129">LinkedIn</a>
-<a class="btn" href="https://github.com/rodrigo1408">GitHub</a>
-<a class="btn" href="Rodrigo_Barreto_Resume.pdf">Download resume</a>
+<section aria-labelledby="docs-title">
+  <div class="head"><h2 id="docs-title">Architecture and experiments</h2><p>The decisions behind the code.</p></div>
+  <div class="docs">
+    <a href="https://github.com/rodrigo1408/oracle-migration-ai/blob/master/docs/ARCHITECTURE.md">LIMIAR architecture<span>Four layers, eight agents</span></a>
+    <a href="https://github.com/rodrigo1408/oracle-migration-ai/blob/master/docs/ADR/README.md">Architecture decision records<span>10 ADRs</span></a>
+    <a href="https://github.com/rodrigo1408/oracle-migration-ai/blob/master/docs/EVIDENCE_MODEL.md">Evidence model<span>When a migration counts as valid</span></a>
+    <a href="https://github.com/rodrigo1408/oracle-migration-ai/blob/master/docs/LIMIAR_MAINTENANCE_PIPELINE.md">Maintenance pipeline<span>States, gates, limits, human approval</span></a>
+    <a href="https://github.com/rodrigo1408/llm-do-zero/blob/main/docs/ARCHITECTURE.md">llm-do-zero math<span>Every layer and its derivative</span></a>
+    <a href="https://github.com/rodrigo1408/llm-do-zero/blob/main/docs/DECISIONS.md">llm-do-zero decisions<span>What was left out and why</span></a>
+  </div>
+</section>
+
+<section id="experience" aria-labelledby="experience-title">
+  <div class="head"><h2 id="experience-title">Experience</h2><p>Enterprise work, mostly on systems that keep businesses running.</p></div>
+  <ol class="timeline">
+    <li><span class="when">Sep 2026 – now</span><div><h3>Independent study and LIMIAR</h3><p>Deepening modern Java and building AI-assisted development tools with Claude Code.</p></div></li>
+    <li><span class="when">Aug 2025 – now</span><div><h3>PL/SQL Developer, Hapvida Notre Dame</h3><p>Collaborating with the Support team to analyze and resolve incidents, while developing improvements and fixes for corporate applications. Developing and maintaining solutions using PL/SQL, Oracle Forms, and Oracle Reports, including implementing new features, fixing bugs, optimizing SQL queries, and enhancing performance. Supporting the Development team in analyzing issues and evolving applications.</p></div></li>
+    <li><span class="when">Jan 2025 – Jul 2026</span><div><h3>PL/SQL Support Senior, Hapvida Notre Dame</h3><p>Handled the analysis and resolution of incidents and service requests for the Authorization/Support team, addressing highly complex issues and performing bug fixes. Optimized SQL queries and Oracle Forms screens, focusing on enhancing application performance and stability. Managed and tracked the backlog, taking a proactive approach to identifying issues and reducing ticket volume.</p></div></li>
+    <li><span class="when">Apr 2022 – Sep 2024</span><div><h3>Web Developer, Grupo Portfólio, for Unimed Fortaleza</h3><p>Built Java REST services and Angular features for healthcare applications used by 1,000+ users, and maintained Oracle PL/SQL packages and procedures.</p></div></li>
+    <li><span class="when">Jul 2020 – Mar 2022</span><div><h3>PL/SQL Developer, Wipro Technologies</h3><p>Built Oracle Forms screens and Oracle Reports, tuned slow SQL queries and supported an internal legacy system.</p></div></li>
+  </ol>
+  <h3 style="font-size:15px;margin:44px 0 14px">Earlier Spring Boot practice projects</h3>
+  <div class="other">
+    <div><a href="https://github.com/rodrigo1408/api_ev">api_ev</a><p>EV battery and motor simulation API. Java 17, Spring Boot 3.3.</p></div>
+    <div><a href="https://github.com/rodrigo1408/api_atendimento">api_atendimento</a><p>Routes support requests to teams with queueing. Java 17, Spring Boot 3.3.</p></div>
+    <div><a href="https://github.com/rodrigo1408/gate-unlock">gate-unlock</a><p>Unlocks a gate from a user and access code. Java 21, Spring Boot 3.3, JPA.</p></div>
+    <div><a href="https://github.com/rodrigo1408/api_semaforo">api_semaforo</a><p>Traffic light with auto cycle, manual override and audit log. Java 21, Spring Boot 3.3.</p></div>
+  </div>
+</section>
+</main>
 </div>
-<p class="small">rodrigomendesbarreto@hotmail.com</p>
+
+<footer id="contact">
+  <div class="wrap">
+    <h2>Let's talk</h2>
+    <p>I'm looking for remote Java developer roles, overlapping US and EU hours. The fastest way to reach me is email.</p>
+    <div class="actions">
+      <a class="btn primary" href="mailto:rodrigomendesbarreto@hotmail.com">Email me</a>
+      <a class="btn" href="https://www.linkedin.com/in/rodrigo-barreto-2b1ba6129">LinkedIn</a>
+      <a class="btn" href="https://github.com/rodrigo1408">GitHub</a>
+      <a class="btn" href="Rodrigo_Barreto_Resume.pdf">Resume (PDF)</a>
+    </div>
+    <p class="fine">Based in Caucaia, Brazil · Postgraduate studies in database administration and in big data management · rodrigomendesbarreto@hotmail.com</p>
+  </div>
 </footer>
-</div>
-
-<script>
-/* boot sequence, once per visit */
-(function(){
-const boot=document.getElementById("boot");
-const reduce=window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-let seen=false; try{seen=sessionStorage.getItem("booted")==="1"}catch(e){}
-if(reduce||seen){boot.classList.add("done");return}
-const lines=["Loading profile","Reading Oracle systems","Compiling Java","Ready"];
-const txt=document.getElementById("bootText"), m=document.getElementById("bootMeter");
-let i=0;
-const step=()=>{ if(i<lines.length){txt.textContent=lines[i];m.style.width=((i+1)/lines.length*100)+"%";i++;setTimeout(step,380)}
-else{boot.classList.add("done");try{sessionStorage.setItem("booted","1")}catch(e){}} };
-boot.addEventListener("click",()=>boot.classList.add("done"));
-step();
-})();
-
-const stages = [
-{n:"Legacy", t:"Legacy input", d:"The starting point: Oracle Forms and Oracle Reports modules exported to XML, mixing screens, database references and business logic with no separation between them.", w:"Input: Forms and Reports XML"},
-{n:"Analysis", t:"Deterministic analysis first", d:"Plain Python extracts blocks, items, triggers, PL/SQL and table references before any AI step runs. Specialist agents for forms, reports and the database then interpret that pre-filtered input.", w:"Agents: XML analyzer, forms analyst, reports analyst, database analyst"},
-{n:"Knowledge", t:"Rebuilding the business rules", d:"An agent decides which constructs are real business rules and maps their dependencies. Every rule must point to evidence in the source; anything unsupported is flagged, never guessed.", w:"Agent: business rules analyst"},
-{n:"Architecture", t:"Designing the target", d:"Oracle Forms has no concept of a REST controller or a service layer, so an agent proposes a Spring Boot architecture that did not exist in the original system.", w:"Agent: architect"},
-{n:"Implementation", t:"Generating Java", d:"An agent writes a first pass of the Java code. Every file path is validated before it touches disk, and rejected paths are recorded instead of silently dropped.", w:"Agent: Java migration agent"},
-{n:"Validation", t:"Review loop", d:"A reviewer checks the generated code against the reconstructed rules and sends it back for correction until it passes or runs out of attempts. Runs can resume after a crash thanks to SQLite checkpointing.", w:"Agent: reviewer, with retry and cost guardrails"},
-{n:"Modern", t:"Modern system", d:"The result is a Spring Boot codebase plus an evidence trail explaining why each part of the migration is considered valid.", w:"Output: Java and Spring Boot code, with evidence reports"}
-];
-const track=document.getElementById("track"), panel=document.getElementById("panel"), coreNum=document.getElementById("coreNum");
-function show(i,focus){
-track.querySelectorAll(".stage").forEach((b,j)=>{
-b.setAttribute("aria-selected",i===j?"true":"false");
-b.tabIndex=i===j?0:-1;
-if(i===j&&focus)b.focus();
-});
-const s=stages[i];
-coreNum.textContent=(i+1)+"/"+stages.length;
-panel.innerHTML=`<p class="step">Stage ${i+1} of ${stages.length}</p><h3>${s.t}</h3><p>${s.d}</p><p class="who">${s.w}</p>`;
-panel.setAttribute("aria-labelledby","stage-"+i);
-}
-stages.forEach((s,i)=>{
-const a=-Math.PI/2+i*2*Math.PI/stages.length, r=38.6;
-const li=document.createElement("li");
-li.setAttribute("role","presentation");
-if(i===0)li.className="legacy";
-li.style.setProperty("--x",(50+r*Math.cos(a))+"%");
-li.style.setProperty("--y",(50+r*Math.sin(a))+"%");
-li.innerHTML=`<button class="stage" role="tab" id="stage-${i}" aria-controls="panel"><span class="dot">${i+1}</span><span class="name">${s.n}</span></button>`;
-li.querySelector("button").addEventListener("click",()=>show(i));
-track.appendChild(li);
-});
-track.addEventListener("keydown",e=>{
-const cur=[...track.querySelectorAll(".stage")].findIndex(b=>b.getAttribute("aria-selected")==="true");
-let n=null;
-if(["ArrowRight","ArrowDown"].includes(e.key))n=(cur+1)%stages.length;
-if(["ArrowLeft","ArrowUp"].includes(e.key))n=(cur-1+stages.length)%stages.length;
-if(e.key==="Home")n=0;
-if(e.key==="End")n=stages.length-1;
-if(n!==null){e.preventDefault();show(n,true);}
-});
-show(0);
-</script>
 </body>
 </html>
