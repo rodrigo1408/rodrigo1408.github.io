@@ -107,6 +107,9 @@ pre .no{color:var(--cyan)}
 .docs a{display:block;text-decoration:none;color:var(--text);background:var(--surface);border:1px solid var(--border);border-radius:8px;padding:14px 16px;font-size:15px}
 .docs a span{display:block;color:var(--muted);font-size:13px;margin-top:4px}
 .docs a:hover{border-color:var(--cyan)}
+.docs .private{color:var(--muted);border:1px dashed var(--border);border-radius:8px;padding:14px 16px;font-size:15px;grid-column:span 2}
+.docs .private span{display:block;font-size:13px;margin-top:4px}
+.note{margin-top:22px;color:var(--muted);font-size:14px;border-left:2px solid var(--border);padding-left:12px}
 
 /* experience */
 .timeline{list-style:none;margin:0;padding:0;display:grid;gap:28px}
@@ -127,6 +130,7 @@ footer > .wrap > p{color:var(--muted);max-width:60ch}
   .grid2,.demos,.other{grid-template-columns:1fr}
   .skills{grid-template-columns:repeat(2,minmax(0,1fr))}
   .docs{grid-template-columns:1fr 1fr}
+  .docs .private{grid-column:span 2}
 }
 @media (max-width:560px){
   .wrap{padding:0 16px}
@@ -134,6 +138,7 @@ footer > .wrap > p{color:var(--muted);max-width:60ch}
   .hero{padding:56px 0 48px}
   .card{padding:20px}
   .skills,.docs{grid-template-columns:1fr}
+  .docs .private{grid-column:auto}
   .timeline li{grid-template-columns:1fr;gap:4px}
 }
 @media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
@@ -200,11 +205,7 @@ footer > .wrap > p{color:var(--muted);max-width:60ch}
         </div>
       </div>
       <div class="tags"><span>Python</span><span>LangGraph</span><span>Claude</span><span>Pydantic</span><span>pytest</span><span>GitHub Actions</span><span>Oracle Forms</span><span>Java / Spring Boot</span></div>
-      <div class="links">
-        <a href="https://github.com/rodrigo1408/oracle-migration-ai">Repository</a>
-        <a href="https://github.com/rodrigo1408/oracle-migration-ai/blob/master/docs/PORTFOLIO.md">Five-minute summary</a>
-        <a href="https://github.com/rodrigo1408/oracle-migration-ai/blob/master/docs/MIGRATION_CASE_STUDIES.md">Case study</a>
-      </div>
+      <p class="note">Private repository. I'm happy to walk through the code, architecture and case study in an interview.</p>
     </article>
 
     <article class="card">
@@ -245,7 +246,7 @@ footer > .wrap > p{color:var(--muted);max-width:60ch}
   <div class="demos">
     <div class="demo">
       <h3>LIMIAR Maintenance: the diff gate</h3>
-      <p>The same <code>check-diff</code> command the pipeline runs on each agent's patch, applied to a throwaway clone.</p>
+      <p>The same <code>check-diff</code> command the pipeline runs on each agent's patch, applied to a throwaway clone. Output from a local run (private repository).</p>
 <pre><span class="cmd">$ python scripts/maintenance_gates_demo.py</span>
 <span class="ok">PASS   </span> legitimate fix with regression test
 <span class="no">BLOCKED</span> developer edits the agent policy
@@ -256,7 +257,6 @@ footer > .wrap > p{color:var(--muted);max-width:60ch}
 <span class="no">BLOCKED</span> real Oracle driver imported
 <span class="no">BLOCKED</span> final diff without a regression test
 9/9 scenarios with the expected result</pre>
-      <a href="https://github.com/rodrigo1408/oracle-migration-ai/blob/master/docs/MAINTENANCE_GATES_DEMO.md">Read the demo</a>
     </div>
     <div class="demo">
       <h3>llm-do-zero: watching a model overfit</h3>
@@ -284,12 +284,10 @@ timpo cochos</pre>
 <section aria-labelledby="docs-title">
   <div class="head"><h2 id="docs-title">Architecture and experiments</h2><p>The decisions behind the code.</p></div>
   <div class="docs">
-    <a href="https://github.com/rodrigo1408/oracle-migration-ai/blob/master/docs/ARCHITECTURE.md">LIMIAR architecture<span>Four layers, eight agents</span></a>
-    <a href="https://github.com/rodrigo1408/oracle-migration-ai/blob/master/docs/ADR/README.md">Architecture decision records<span>10 ADRs</span></a>
-    <a href="https://github.com/rodrigo1408/oracle-migration-ai/blob/master/docs/EVIDENCE_MODEL.md">Evidence model<span>When a migration counts as valid</span></a>
-    <a href="https://github.com/rodrigo1408/oracle-migration-ai/blob/master/docs/LIMIAR_MAINTENANCE_PIPELINE.md">Maintenance pipeline<span>States, gates, limits, human approval</span></a>
     <a href="https://github.com/rodrigo1408/llm-do-zero/blob/main/docs/ARCHITECTURE.md">llm-do-zero math<span>Every layer and its derivative</span></a>
     <a href="https://github.com/rodrigo1408/llm-do-zero/blob/main/docs/DECISIONS.md">llm-do-zero decisions<span>What was left out and why</span></a>
+    <a href="https://github.com/rodrigo1408/llm-do-zero/blob/main/results/SUMMARY.md">llm-do-zero experiments<span>Generated results, never edited by hand</span></a>
+    <div class="private">LIMIAR documentation<span>Architecture, 10 ADRs, evidence model and maintenance pipeline. Private, available on request.</span></div>
   </div>
 </section>
 
