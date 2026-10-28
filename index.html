@@ -77,7 +77,7 @@ button{font:inherit;color:inherit}
 .sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
 
 /* top bar */
-.bar{display:grid;grid-template-columns:1fr auto 1fr;align-items:center;gap:16px;padding:14px 22px}
+.bar{display:grid;grid-template-columns:1fr auto 1fr;align-items:center;gap:16px;padding:14px 22px;max-width:1440px;margin:0 auto}
 .brand{display:flex;align-items:center;gap:12px;color:var(--text);text-decoration:none}
 .brand svg{width:34px;height:34px;flex:none}
 .brand b{display:block;font-weight:600;font-size:15px;line-height:1.1}
@@ -98,11 +98,11 @@ button.round{cursor:pointer;padding:0}
 [data-ui="light"] .round .sun{display:block}
 .round:hover{color:var(--text);border-color:var(--border2)}
 .round svg{width:16px;height:16px}
-.banner{margin:0 22px 0 auto;padding:7px 16px;border-radius:10px;background:var(--panel);border:1px solid var(--border);color:var(--muted);font-size:13px;width:max-content;max-width:calc(100% - 44px)}
+.banner{margin:0 max(22px,calc((100% - 1440px) / 2 + 22px)) 0 auto;padding:7px 16px;border-radius:10px;background:var(--panel);border:1px solid var(--border);color:var(--muted);font-size:13px;width:max-content;max-width:calc(100% - 44px)}
 .banner b{color:var(--text);font-weight:500}
 
 /* stage */
-.stage{display:grid;grid-template-columns:minmax(0,1fr) 400px;gap:18px;padding:12px 22px 22px;align-items:start}
+.stage{display:grid;grid-template-columns:minmax(0,1fr) 400px;gap:18px;padding:12px 22px 22px;align-items:start;max-width:1440px;margin:0 auto}
 .stage>*,.side>*,.detail>*,.graph>*{min-width:0}
 .graph{position:relative;min-height:640px;display:grid;grid-template-columns:minmax(220px,280px) 200px minmax(260px,1fr);column-gap:84px;align-items:center}
 .wires{position:absolute;inset:0;width:100%;height:100%;pointer-events:none;overflow:visible}
@@ -361,7 +361,7 @@ const job=(id,title,org,from,to,text,chips,stack)=>({id,title:`${title}, ${org}`
 
 const CATS=[
  {id:"projects",label:"Featured projects",icon:"project",items:[
-  {id:"edufin",title:"EduFin",short:"EduFin · edufin",chips:[["working","g"],["public","g"],["Java+React","p"]],
+  {id:"edufin",title:"EduFin",short:"EduFin · edufin_ai",chips:[["working","g"],["public","g"],["Java+React","p"]],
    subtitle:"Full-stack financial education platform for all ages",
    status:["Working app · open source",""],note:"Figures measured on 28 Oct 2026, main branch",
    action:{label:"Explore repository",href:"https://github.com/rodrigo1408/edufin_ai"},
